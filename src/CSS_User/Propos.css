@@ -1,0 +1,31 @@
+
+/* body start for Propos */
+#aboutPage{
+    margin-top: 150px;
+    text-align: center;
+    margin-top: 100px !important;
+    margin-bottom: 100px !important;
+  }
+  
+  .propos{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(205, 245, 246);
+    margin-bottom: 100px !important;
+  }
+  
+  .information{
+      background-color: #b5d3fa;
+      /* background-image: url("img/legal.jpg"), url("paper.gif"); */
+  }
+  
+  .Propossubmit_button{
+     text-align: center;
+     width: 100px;
+     height: 50px;
+     border-radius: 30px;
+     border-color: turquoise !important;   
+  }
+   
+  /* body end from Propos */

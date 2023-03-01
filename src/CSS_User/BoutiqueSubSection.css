@@ -1,0 +1,72 @@
+/* body start from boutique */
+#boutiqeSubsection{
+    text-align: center;
+    margin-top: 100px !important;
+    margin-bottom: 100px !important;
+}
+#Boutique_body{
+    padding: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 200px !important;
+
+}
+ #sidebar1{
+    text-align: center;
+}
+
+.sideImg{
+    width: 100px;
+    height: 200px;
+    padding-top: 40px;
+}
+
+.side_imgs{
+    width: 200px;
+    height: 200px;
+}
+.couleur_img1{
+    width: 100px;
+    height: 100px;
+    padding-right: 10px;
+}
+.couleur_img2{
+    width: 100px;
+    height: 100px;
+    padding-left: 10px;
+}
+
+.taille1{
+    padding-top:20px;
+    text-align: center;
+    word-spacing: 50px;
+}
+.size_area{
+    margin-top: 100px;
+    padding-top: 20px;
+    text-align: center;
+    word-spacing: 30px;
+    background-color: rgb(107, 104, 117);
+    color: aliceblue;
+}
+
+.quantity_adjust{
+    padding-top: 40px;
+    text-align: center;
+}
+.btns{
+padding-inline-start: 10px;
+}
+
+#add_button{
+    margin-top: 40px;
+    margin-left: 50px;
+    padding: 5px 5px 5px 5px;
+    text-align: center;
+}
+/* #section_images{
+   
+} */
+
+/* body end from boutique */

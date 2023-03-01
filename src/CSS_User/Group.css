@@ -1,0 +1,148 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.Contactcontact_container {
+  width: 500px;
+  margin: 50px auto;
+  position: relative;
+}
+
+.Contactlanding {
+  margin-top: 200px !important;
+  margin-bottom: 200px !important;
+  background-color: rgb(123, 123, 8);
+  padding-top: 500px;
+  width: 100%;
+
+  display: flex;
+}
+.helpline {
+  width: 640px;
+}
+.helpline {
+  width: 640px;
+}
+
+.helpline {
+  padding: 100px !important;
+  background-color: rgb(39, 143, 153);
+  color: white;
+}
+
+.Contactheader {
+  color: rgb(0, 225, 255);
+  font-size: 34px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+}
+
+.helpline {
+  height: 100%;
+  width: 100%;
+}
+/* <h4>Write Us A Message area</h4> */
+
+.hotlinkcontact {
+  background-color: rgb(36, 126, 126);
+  padding: 100px !important;
+  margin: 100px !important;
+  position: relative;
+}
+.hotlinkcontact h4 {
+  padding: 5px !important;
+  font-size: 30px;
+  color: rgb(16, 16, 104);
+}
+.hotlinkcontact h6 {
+  padding: 10px !important;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 50px;
+}
+.hotlinkinput_grp {
+  display: flex;
+  margin-bottom: 100px;
+}
+.hotlinkinput_grp section {
+  width: 50%;
+}
+.hotlinkinput_grp section:nth-child(1) {
+  padding: 0 15px 15px 0;
+}
+.hotlinkinput_grp section:nth-child(2) {
+  padding: 0 15px 15px 15px;
+  background-color: yellow;
+}
+.hotlinkinput_grp input,
+select {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid rgb(19, 120, 94);
+  margin: 10px 10px 0;
+}
+textarea {
+  border: none;
+  border-bottom: rgba(0, 0, 0, 0.912) 2px solid;
+  background: white;
+  width: 100%;
+}
+button {
+  /* position: absolute; */
+  right: 0;
+  margin-top: 15px;
+  padding: 10px 25px;
+  border: none;
+  background-color: rgb(219, 219, 55);
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/*********************************************/
+/************* responsive ****************/
+/*********************************************/
+
+/* @media screen and (min-width: 960px) and (max-width: 1200px) {
+  .groupImage img {
+    object-fit: cover;
+    max-height: 100%;
+  }
+  .Contactright {
+    object-fit: cover;
+    max-height: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 959px) {
+  .groupImage img {
+    height: 500px;
+    width: 500px;
+  }
+  .Contactright {
+    height: 500px;
+    width: 500px;
+  }
+}
+
+@media screen and (min-width: 480px) and (max-width: 767px) {
+  .groupImage img {
+    height: 400px;
+    width: 400px;
+  }
+  .Contactright {
+    height: 400px;
+    width: 400px;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .groupImage img {
+    height: 190px;
+    width: 190px;
+  }
+  .Contactright {
+    height: 190px;
+    width: 190px;
+  }
+} */

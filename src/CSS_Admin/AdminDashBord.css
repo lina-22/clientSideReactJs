@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* background-color: rgb(14, 155, 155); */
+}
+.mainAdmin{
+    margin: 0 auto; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(230, 251, 244); 
+     
+} 
+
+/* body start for admin Dashbord */
+#admin{
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 150px;
+    padding-bottom: 50px;
+    color: rgb(8, 50, 50);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 60px;
+}
+.AdminDroits p{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    height: 400px;
+}
+.AdminLayoutNav{
+    display: flex;
+    justify-content: space-around;
+    word-spacing: 30px;
+}
+.dashbordBody{
+    display: flex;
+    justify-content: space-around;
+    background-color: teal;
+    padding-top: 50px;
+    padding-bottom: 150px;   
+}
+.placeholder{
+    width: 230px;
+    height: 50px;
+    text-align: center;
+    border-bottom: rgb(175, 175, 225); 
+}
+
+.panier_logo{
+    text-align: end;
+    /* background-color: aquamarine; */
+}

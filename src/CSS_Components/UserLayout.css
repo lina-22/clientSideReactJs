@@ -1,0 +1,9 @@
+*{
+    box-sizing: border-box;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.main {
+    overflow: hidden !important;
+}
+
