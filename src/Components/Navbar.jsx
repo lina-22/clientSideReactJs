@@ -37,12 +37,11 @@ function Navbar() {
               <img className="panier" src={shoppingCartIcon} alt="panier" />
               <span
                 style={{
-                  backgroundColor: "#0c6d74",
+                  backgroundColor: "",
                   right: -20,
                   borderRadius: "50%",
                 }}
-                className="position-absolute px-3 py-1 text-white"
-              >
+                className="position-absolute px-3 py-1 text-white">
                 {reservationValue.cartCount}
               </span>
             </span>
