@@ -48,7 +48,6 @@ function Footer() {
             des vêtements de femmes et hommes. Choisissez, achetez et venez
             récupérer votre commande à notre dépôt ! Des images attractives et
             des tarifs tout en douceur....Idées susceptibles de vous plaire.
-            test...
           </p>
           <section className="contact_info">
             <address>
