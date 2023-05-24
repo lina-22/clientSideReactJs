@@ -5,7 +5,6 @@ import img20 from "../Images/imgPage1/image 20.png";
 import img21 from "../Images/imgPage1/image 21.png";
 import img22 from "../Images/imgPage1/image 22.png";
 
-
 import "../CSS_Components/Footer.css";
 
 function Footer() {
@@ -44,16 +43,15 @@ function Footer() {
         <section className="bottom">
           <br />
           <p className="about_short">
-            Click&Collect est un site e-commerce réservé aux passionnés de la mode.
-            Click & Collect est la solution simple et rapide pour trouver des
-            vêtements de femmes et hommes. Choisissez, achetez et venez
+            Infinity Fashion est un site e-commerce réservé aux passionnés de la
+            mode. Infinity Fashion est la solution simple et rapide pour trouver
+            des vêtements de femmes et hommes. Choisissez, achetez et venez
             récupérer votre commande à notre dépôt ! Des images attractives et
             des tarifs tout en douceur....Idées susceptibles de vous plaire.
-            
           </p>
           <section className="contact_info">
             <address>
-              22 rue de chaigneau, Lorient 2022 DressOnlineDoor. Tout droits
+              22 rue de chaigneau, Lorient 2023 Infinity Fashion. Tout droits
               résevés.
             </address>
             <section className="social">
