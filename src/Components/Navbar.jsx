@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logoImg from "../Images/imgPage1/Logo.jpeg";
+import logoImg from "../Images/IF.JPG";
 import panierImg from "../Images/imgPage1/panier_img.png";
 import shoppingCartIcon from "../Images/imgPage1/shopping_cart.svg";
 import menuIcon from "../Images/menu.png";
@@ -28,7 +28,7 @@ function Navbar() {
         <img className="logo" src={logoImg} alt="" />
         <header>
           <h1>
-            KKKK <span>&</span> KKK
+            Infinity <span></span> Fashion
           </h1>
         </header>
         <section className="panier_logo">
@@ -37,12 +37,11 @@ function Navbar() {
               <img className="panier" src={shoppingCartIcon} alt="panier" />
               <span
                 style={{
-                  backgroundColor: "#0c6d74",
+                  backgroundColor: "",
                   right: -20,
                   borderRadius: "50%",
                 }}
-                className="position-absolute px-3 py-1 text-white"
-              >
+                className="position-absolute px-3 py-1 text-white">
                 {reservationValue.cartCount}
               </span>
             </span>
@@ -63,7 +62,7 @@ function Navbar() {
         </section>
       </section>
 
-       {/* panier and loginOut section end */}
+      {/* panier and loginOut section end */}
       <section className="mainNav">
         <input type="checkbox" id="nav-toggler" className="nav-toggler" />
         <label htmlFor="nav-toggler" id="nav-lbl">
@@ -82,8 +81,13 @@ function Navbar() {
               <Link to="/boutiqueLandingImgaes"> Boutique </Link>
             </li>
             <li>
-              {auth.user?<Link to="#" onClick={logOutHandler}>Disconnexion </Link>:<Link to="/login"> Connexion </Link>}
-              
+              {auth.user ? (
+                <Link to="#" onClick={logOutHandler}>
+                  Disconnexion{" "}
+                </Link>
+              ) : (
+                <Link to="/login"> Connexion </Link>
+              )}
             </li>
             <li>
               <Link to="/panier"> Contact </Link>
@@ -92,8 +96,10 @@ function Navbar() {
               <Link to="/propos"> Propos </Link>
             </li>
             <li>
-              <Link to="/"> Favori  <img className="favori" src={favori} alt="" /></Link>
-             
+              <Link to="/">
+                {" "}
+                Favori <img className="favori" src={favori} alt="" />
+              </Link>
             </li>
           </ul>
         </nav>
