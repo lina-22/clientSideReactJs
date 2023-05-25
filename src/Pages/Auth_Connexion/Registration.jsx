@@ -12,17 +12,18 @@ import { toast } from "react-toastify";
 import { LOG_IN } from "../../actionTypes";
 import { AuthContext } from "../../contexts";
 import { BACKEND_URL } from "../../utils";
-
+import styles from "./registration.module.scss";
 
 function Registration() {
   const { auth, authDispatch } = useContext(AuthContext);
   const [state, setState] = useState({
     isLoading: false,
-    first_name: "",
-    last_name: "",
+    first_Name: "",
+    last_Name: "",
     email: "",
     password: "",
     password_confirmation: "",
+    role: "USER",
   });
 
   const navigate = useNavigate();
@@ -47,10 +48,10 @@ function Registration() {
     setState({ ...state, isLoading: true });
 
     axios
-      .post(`${BACKEND_URL}/register`, state)
+      .post(`${BACKEND_URL}/users/register`, state)
       .then((res) => {
-        const { status, data, message } = res.data;
-        if (status) {
+        const { code, message, data } = res.data;
+        if (code === 200) {
           authDispatch({
             type: LOG_IN,
             payload: data,
@@ -81,14 +82,12 @@ function Registration() {
   };
 
   return (
-    <Container
-      style={{ height: "100vh" }}
-      className="mx-auto d-flex justify-content-center align-items-center btn-dark"
-    >
-      <div className="p-4 border shadow rounded w-50">
+    <main
+      // className="mx-auto d-flex justify-content-center align-items-center btn-dark"
+      className={`${styles.main}`}>
+      <section>
         <Form onSubmit={onSubmitHandler}>
-          <h2 className="text-center mb-3">Créer Un Compte</h2>
-          <hr />
+          <h2>Créer Un Compte</h2>
 
           {/* ***************First Name************* */}
           <Form.Group className="my-3">
@@ -173,8 +172,8 @@ function Registration() {
             />
           </div>
         </Form>
-      </div>
-    </Container>
+      </section>
+    </main>
   );
 }
 

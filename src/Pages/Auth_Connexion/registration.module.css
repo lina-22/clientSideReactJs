@@ -1,0 +1,16 @@
+.main {
+  width: 100%;
+  display: grid;
+  place-items: center;
+  height: 100dvh;
+}
+.main section {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 600px;
+  margin: 0 auto;
+  padding: 25px !important;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+.main section h2 {
+  text-align: center;
+}/*# sourceMappingURL=registration.module.css.map */
