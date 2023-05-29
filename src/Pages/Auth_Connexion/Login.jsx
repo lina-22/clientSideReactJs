@@ -42,10 +42,10 @@ function Login() {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     setState({ ...state, isLoading: true });
-
+    console.log("test : ", state);
     axios
       .post(`${BACKEND_URL}/login`, {
-        email: state.email,
+        username: state.email,
         password: state.password,
       })
       .then((res) => {
@@ -71,9 +71,8 @@ function Login() {
 
   return (
     <Container
-      style={{ height: "100vh"}}
-      className="mx-auto d-flex justify-content-center align-items-center btn-light"
-    >
+      style={{ height: "100vh" }}
+      className="mx-auto d-flex justify-content-center align-items-center btn-light">
       <div className="p-4 border shadow rounded w-50">
         <Form onSubmit={onSubmitHandler}>
           <h2 className="text-center mb-3">Log In</h2>
