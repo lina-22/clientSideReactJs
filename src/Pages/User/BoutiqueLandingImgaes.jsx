@@ -1,4 +1,3 @@
-
 import "../../CSS_User/BoutiqueLandingImages.css";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
@@ -38,7 +37,8 @@ function BoutiqueLandingImgaes() {
       </div>
 
       <Container className="mx-auto">
-        <h2> Idées susceptibles de vous plaire </h2><br />
+        <h2> Nos Meilleures Offres Idées susceptibles de vous plaire </h2>
+        <br />
         <Row>
           <Col sm={3} lg={2} className="my-2">
             <div className="px-2">
@@ -50,8 +50,7 @@ function BoutiqueLandingImgaes() {
                     className="w-100 mt-2 py-1"
                     variant={catIndex === index ? "primary" : "light"}
                     key={index}
-                    onClick={() => setCatIndex(index)}
-                  >
+                    onClick={() => setCatIndex(index)}>
                     {cat.name}
                   </Button>
                 ))}
