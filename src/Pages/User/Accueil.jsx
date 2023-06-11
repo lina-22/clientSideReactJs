@@ -43,6 +43,7 @@ function Accueil() {
           <h4>
             Toutes les tendances <br />
             <span>A UN SEUL ENDROIT</span>
+            {/* <span>Les Styles Du Moment</span> */}
           </h4>
           <article>
             {state.products.slice(0, 4).map((product, index) => (
