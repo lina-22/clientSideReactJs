@@ -1,6 +1,7 @@
-import mainImg from "../../Images/imgPage1/image 23.png";
-import photoLeft from "../../Images/imgPage1/vedio.png";
+import mainImg from "../../Images/hero_img.jpg";
 import photoRight from "../../Images/imgPage1/vedio.png";
+import photoLeft from "../../Images/home.webp";
+import photoHome22 from "../../Images/home22.webp";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -66,7 +67,7 @@ function Accueil() {
           <article>
             <p>à la mode maintenant</p>
             <p>pour les hommes</p>
-            <img className="photo_left" src={photoLeft} alt="" />
+            <img className="photo_left" src={photoRight} alt="" />
           </article>
         </section>
 
@@ -75,7 +76,7 @@ function Accueil() {
             {/* here need to bring the photos randomly */}
             <img className="photo_left" src={photoLeft} alt="" />
             <img className="photo_left" src={photoLeft} alt="" />
-            <img className="photo_left" src={photoLeft} alt="" />
+            <img className="photo_left" src={photoHome22} alt="" />
             <img className="photo_left" src={photoLeft} alt="" />
             {state.products.slice(0, 4).map((product, index) => (
               <Link to={`/boutiqueSubSection/${product.id}`} key={index}>

@@ -64,17 +64,17 @@ function BoutiqueSubSection() {
                 </div>
                 <div className="px-2">
                   <h4 className="bg-light border-start border-warning border-5 py-3 px-2">
-                   Le Prix : {product.price}
+                    Le Prix : {product.price}
                   </h4>
                 </div>
                 <div className="px-2">
                   <h4 className="bg-light border-start border-warning border-5 py-3 px-2">
-                  La réduction: {product.discount}
+                    La réduction: {product.discount}
                   </h4>
                 </div>
                 <div className="px-2">
                   <h4 className="bg-light border-start border-warning border-5 py-3 px-2">
-                  La description {product.description}
+                    La description {product.description}
                   </h4>
                 </div>
               </Col>
@@ -83,7 +83,12 @@ function BoutiqueSubSection() {
           <Col md={4} lg={3}>
             {product.availables &&
               product.availables.map((avail, index) => (
-                <AvailableBox avl={avail} key={index} productID={productID} getProduct={getProduct} />
+                <AvailableBox
+                  avl={avail}
+                  key={index}
+                  productID={productID}
+                  getProduct={getProduct}
+                />
               ))}
           </Col>
         </Row>
@@ -122,7 +127,7 @@ function AvailableBox({ avl, productID, getProduct }) {
           if (status) {
             toast.success("Ajouter au panier!");
             setCartQuantity("");
-              getProduct();
+            getProduct();
             reservationDispatch({ type: SET_RESERVATION, payload: data });
           } else {
             toast.success(message);
@@ -134,7 +139,7 @@ function AvailableBox({ avl, productID, getProduct }) {
       navigator("/login", { state: { prevLocation: location.pathname } });
     }
   };
-// console.log(productID,cartQuantity,avl.id);
+  // console.log(productID,cartQuantity,avl.id);
   return (
     <div className="mt-3 p-2 border">
       <ListGroup>

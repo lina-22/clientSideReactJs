@@ -22,7 +22,8 @@ function Product() {
     if (!productValue.isLoaded) {
       axios
         .get(`${BACKEND_URL}/products`)
-        .then((res) => {/*console.log(res)*/
+        .then((res) => {
+          console.log(res.data);
           const { status, data, message } = res.data;
           if (status) {
             productDispatch({
@@ -45,7 +46,7 @@ function Product() {
 
   const handleAttatchModal = () => {
     setShowAttatch((prvSt) => !prvSt);
-  }
+  };
 
   const saveProduct = (data) => {
     axios
@@ -100,8 +101,7 @@ function Product() {
         <Button
           onClick={handleShowModal}
           className="float-end"
-          variant="primary"
-        >
+          variant="primary">
           Add Product
         </Button>
       </div>
@@ -122,8 +122,7 @@ function Product() {
               <th>Actions</th>
             </tr>
           </thead>
-          <   
-            tbody>
+          <tbody>
             {productValue.products.map((prod, index) => (
               <ProductTr
                 handleShowModal={handleShowModal}
@@ -146,7 +145,7 @@ function Product() {
         saveProduct={saveProduct}
         updateProduct={updateProduct}
       />
-      <AttatchCategoryModal 
+      <AttatchCategoryModal
         show={showAttatch}
         handleClose={handleAttatchModal}
       />

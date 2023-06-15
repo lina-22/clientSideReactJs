@@ -1,0 +1,12 @@
+.main {
+  border: 2px solid red;
+  width: 190px;
+  min-height: 220px;
+  padding: 10px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+img.product_img {
+  height: 150px;
+  width: 100%;
+}/*# sourceMappingURL=product.module.css.map */

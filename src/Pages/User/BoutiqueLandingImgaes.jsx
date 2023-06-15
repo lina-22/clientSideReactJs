@@ -7,9 +7,12 @@ import { BACKEND_URL, IMAGE_URL } from "../../utils";
 import { LOAD_CATEGORIES } from "../../actionTypes";
 import { toast } from "react-toastify";
 import { Link, useParams } from "react-router-dom";
+import { Product } from "../../Components/Product/SignleProduct/Product";
 function BoutiqueLandingImgaes() {
   const { categoryValue, categoryDispatch } = useContext(CategoryContext);
   const [catIndex, setCatIndex] = useState(0);
+
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     if (!categoryValue.isLoaded) {
@@ -30,13 +33,22 @@ function BoutiqueLandingImgaes() {
     }
   }, []);
 
+  useEffect(() => {
+    getProducts();
+  }, []);
+  const getProducts = () => {
+    axios.get(`${BACKEND_URL}/products`).then((res) => {
+      console.log("products :", res.data);
+    });
+  };
+
   return (
     <div className="Bboutique">
       <div className="Blandingboutiqe">
         <h1>Boutique</h1>
       </div>
 
-      <Container className="mx-auto">
+      {/* <Container className="mx-auto">
         <h2> Nos Meilleures Offres Idées susceptibles de vous plaire </h2>
         <br />
         <Row>
@@ -51,7 +63,7 @@ function BoutiqueLandingImgaes() {
                     variant={catIndex === index ? "primary" : "light"}
                     key={index}
                     onClick={() => setCatIndex(index)}>
-                    {cat.name}
+                    {cat.categoryValue}
                   </Button>
                 ))}
               </p>
@@ -68,7 +80,9 @@ function BoutiqueLandingImgaes() {
                           <div className="bg-light py-3 px-2">
                             <h6>{prod.name}</h6>
                           </div>
-                          <Link to={`/boutiqueSubSection/${prod.id}`} href="#">
+                          <Link
+                            to={`/boutiqueSubSection/${prod.product_id}`}
+                            href="#">
                             <img
                               className="w-100"
                               src={`${IMAGE_URL}/${prod.image}`}
@@ -104,6 +118,10 @@ function BoutiqueLandingImgaes() {
             </div>
           </Col>
         </Row>
+      </Container> */}
+
+      <Container>
+        <Product></Product>
       </Container>
     </div>
   );
