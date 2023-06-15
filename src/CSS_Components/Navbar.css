@@ -1,124 +1,125 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;500&display=swap");
 
-*{
-    margin: 0 !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
+* {
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
 }
 
 section.top marquee {
-    background-color: rgb(22, 142, 132);
-    color: white;
-    width: 100%;
+  background-color: rgb(1, 39, 35);
+  color: white;
+  width: 100%;
 }
 .logo {
-    width: 150px;
-    height: 120px;
+  width: 150px;
+  height: 120px;
 }
-.logo_ttl_bskt{
-    display: flex;
-    justify-content: space-around;
-    padding: 20px 0 !important;
+.logo_ttl_bskt {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0 !important;
 }
-header h1{
-    font-size: 62px;
-    font-family: 'Montserrat';
-    font-weight: 200;
+header h1 {
+  font-size: 62px;
+  font-family: "Montserrat";
+  font-weight: 200;
 }
-header h1 span{
-    font-weight: 600;
+header h1 span {
+  font-weight: 600;
 }
-section.panier_logo img{
-    width: 50px;
-    height: 50px;
-    margin-top: 10px !important;
+section.panier_logo img {
+  width: 50px;
+  height: 50px;
+  margin-top: 10px !important;
 }
-
 
 /* navigation  */
 
 section.mainNav {
-    position: absolute;
-    right: 0;
-    /* background-color: rgba(0000, 0000, 0000, 0.8); */
-    width: 100%;
-    font-family: 'montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: 200;
+  position: absolute;
+  right: 0;
+  /* background-color: rgba(0000, 0000, 0000, 0.8); */
+  width: 100%;
+  font-family: "montserrat", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 200;
 }
 
 nav {
-    transform: scale(1, 0);
-    transition: 250ms ease-in-out;
-    transform-origin: top;
-    /* background-color: rgb(216, 244, 241); */
-   
+  transform: scale(1, 0);
+  transition: 250ms ease-in-out;
+  transform-origin: top;
+  /* background-color: rgb(216, 244, 241); */
 }
 nav ul {
-    font-size: 18px;
-    margin-left: 20px;
-    list-style: none;
+  background-color: rgba(248, 249, 254, 0.6);
+  font-size: 18px;
+  margin-left: 20px;
+  list-style: none;
 }
 nav ul li {
-    transform: scale(1, 0);
-    padding: 10px;
-    margin: 0 10px !important;
-    
+  transform: scale(1, 0);
+  padding: 10px;
+  margin: 0 10px !important;
 }
 nav ul li:hover {
-    background-color: rgb(0, 0, 0, 1);
+  background-color: rgb(0, 0, 0, 1);
 }
-nav ul li a{
-    display: block;
-    text-decoration: none;
-    color: #0c6d74
+nav ul li a {
+  display: block;
+  text-decoration: none;
+  font-weight: 900;
+  color: black;
+  /* color: hwb(343 93% 0% / 0.232); */
 }
-nav ul li a:hover{
-    color: #fff;
-    font-weight: 400;
+nav ul li a:hover {
+  color: #fff;
+  font-weight: 400;
 }
 
-input.nav-toggler  {
-    margin-left: 20px;
-    position: absolute;
-    /* top: -70px; */
-    right: 10%;
-    opacity: 0;
+input.nav-toggler {
+  margin-left: 20px;
+  position: absolute;
+  /* top: -70px; */
+  right: 10%;
+  opacity: 0;
 }
 input.nav-toggler:checked ~ nav {
-    transform: scale(1, 1);
+  transform: scale(1, 1);
 }
 input.nav-toggler:checked ~ nav ul li {
-    transform: scale(1, 1);
-    transition: 250ms ease-in-out;
+  transform: scale(1, 1);
+  transition: 250ms ease-in-out;
 }
 #nav-lbl {
-     position: absolute;
-     width: 25px;
-     top: -25px !important;
+  position: absolute;
+  width: 25px;
+  top: -25px !important;
 }
-#nav-lbl img{
-    height: 100%;
-    width: 100%;
+#nav-lbl img {
+  height: 100%;
+  width: 100%;
 }
 
-@media only screen and (min-width: 800px){
-    nav ul li {
-        transform: scale(1, 1);
-        display: inline-block;
-        padding: 4px;
-        width: 120px;
-        height: 25px;
-        
-    }
-    nav {
-        transform: scale(1, 1);
-        text-align: center;
-    }
-    nav input.nav-toggler, nav #nav-lbl, #nav-lbl img {
-        display: none !important;
-    }
+@media only screen and (min-width: 800px) {
+  nav ul li {
+    transform: scale(1, 1);
+    display: inline-block;
+    padding: 4px;
+    width: 120px;
+    height: 25px;
+  }
+  nav {
+    transform: scale(1, 1);
+    text-align: center;
+  }
+  nav input.nav-toggler,
+  nav #nav-lbl,
+  #nav-lbl img {
+    display: none !important;
+  }
 }
 
 /* @media screen and (min-width:960px) and (max-width:1200px)
@@ -128,56 +129,55 @@ input.nav-toggler:checked ~ nav ul li {
 } */
 
 /* responsive  */
-@media screen and (min-width:800px) and (max-width:959px) {
-    section.panier_logo img{
-        width: 40px;
-        height: 40px;
-        margin-top: 15px;
-    }
-    h1 {
-        font-size: 50px !important;
-    }
+@media screen and (min-width: 800px) and (max-width: 959px) {
+  section.panier_logo img {
+    width: 40px;
+    height: 40px;
+    margin-top: 15px;
+  }
+  h1 {
+    font-size: 50px !important;
+  }
 }
 
-@media screen and (min-width:480px) and (max-width:799px) {
-    .logo {
-        width: 60px;
-        height: 60px;
-    }
-    section.panier_logo img{
-        width: 40px;
-        height: 40px;
-        margin-top: 15px;
-    }
-    
-    h1 {
-        font-size: 40px !important;
-    }
-    label {
-        right: 50px !important;
-        top: -25px !important;
-    }
+@media screen and (min-width: 480px) and (max-width: 799px) {
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
+  section.panier_logo img {
+    width: 40px;
+    height: 40px;
+    margin-top: 15px;
+  }
+
+  h1 {
+    font-size: 40px !important;
+  }
+  label {
+    right: 50px !important;
+    top: -25px !important;
+  }
 }
 
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .logo {
+    width: 50px;
+    height: 50px;
+  }
+  section.panier_logo img {
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+  }
 
-@media screen and (min-width:320px) and (max-width:479px) {
-    .logo {
-        width: 50px;
-        height: 50px;
-    }
-    section.panier_logo img{
-        width: 30px;
-        height: 30px;
-        margin-top: 10px;
-    }
-    
-    h1 {
-        font-size: 30px !important;
-    }
-    label {
-        right: 30px !important;
-        top: -20px !important;
-    }
+  h1 {
+    font-size: 30px !important;
+  }
+  label {
+    right: 30px !important;
+    top: -20px !important;
+  }
 }
 /* @media only screen 
   and (min-device-width: 320px) 

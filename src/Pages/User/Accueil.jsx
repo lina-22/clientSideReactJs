@@ -1,7 +1,11 @@
 import mainImg from "../../Images/hero_img.jpg";
-import photoRight from "../../Images/imgPage1/vedio.png";
+import photoRight from "../../Images/Final_Male_Dress/twomen.avif";
 import photoLeft from "../../Images/home.webp";
 import photoHome22 from "../../Images/home22.webp";
+import photoHome222 from "../../Images/Final_Female_Dress/dress.jpg";
+import photoHome2222 from "../../Images/Final_Female_Dress/dress22.jpg";
+
+import photoWomen from "../../Images/Final_Female_Dress/womens.jpg";
 
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -35,7 +39,7 @@ function Accueil() {
       <div className="hero">
         <img className="main_image" src={mainImg} alt="" />
         <h2 className="info_pub">
-          Économisez votre temps <br /> et vivez facilement
+          La vie est devenue <br /> très facile
         </h2>
         <h3>Meilleures ventes de vêtements!</h3>
       </div>
@@ -60,7 +64,7 @@ function Accueil() {
         </section>
         <section className="trending">
           <article>
-            <img className="photo_right" src={photoRight} alt="" />
+            <img className="photo_right" src={photoWomen} alt="" />
             <p>à la mode maintenant</p>
             <p>pour les femmes</p>
           </article>
@@ -75,9 +79,9 @@ function Accueil() {
           <article>
             {/* here need to bring the photos randomly */}
             <img className="photo_left" src={photoLeft} alt="" />
-            <img className="photo_left" src={photoLeft} alt="" />
+            <img className="photo_left" src={photoHome2222} alt="" />
             <img className="photo_left" src={photoHome22} alt="" />
-            <img className="photo_left" src={photoLeft} alt="" />
+            <img className="photo_left" src={photoHome222} alt="" />
             {state.products.slice(0, 4).map((product, index) => (
               <Link to={`/boutiqueSubSection/${product.id}`} key={index}>
                 <img
