@@ -46,18 +46,30 @@ function Registration() {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     setState({ ...state, isLoading: true });
+    if (state.password !== state.password_confirmation) {
+      toast("Password do not match!");
+      setState({ ...state, isLoading: false });
+      return;
+    }
+    let newUser = {
+      firstName: state.first_Name,
+      lastName: state.last_Name,
+      email: state.email,
+      password: state.password,
+      role: "USER",
+    };
 
     axios
-      .post(`${BACKEND_URL}/users/register`, state)
+      .post(`${BACKEND_URL}/users/register`, newUser)
       .then((res) => {
-        const { code, message, data } = res.data;
-        if (code === 200) {
-          authDispatch({
-            type: LOG_IN,
-            payload: data,
-          });
-
+        console.log("test registration : ", res.data);
+        const { message, code } = res.data;
+        if (code === "200") {
           toast.success(message);
+          // authDispatch({
+          //   type: LOG_IN,
+          //   payload: data,
+          // });
 
           setState({
             isLoading: false,
@@ -67,7 +79,6 @@ function Registration() {
             password: "",
             password_confirmation: "",
           });
-
           navigate("/");
         } else {
           toast.error(message);

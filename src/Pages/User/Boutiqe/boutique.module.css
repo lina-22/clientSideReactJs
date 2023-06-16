@@ -1,0 +1,5 @@
+.productShowcase {
+  margin: auto;
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+}/*# sourceMappingURL=boutique.module.css.map */

@@ -13,7 +13,7 @@ import Reservations from "./Pages/Admin/Reservations";
 // *************************************************
 import UserLayout from "./Components/UserLayout";
 import Accueil from "./Pages/User/Accueil";
-import BoutiqueLandingImgaes from "./Pages/User/BoutiqueLandingImgaes";
+import BoutiqueLandingImgaes from "./Pages/User/Boutiqe/BoutiqueLandingImgaes";
 import BoutiqueSubSection from "./Pages/User/BoutiqueSubSection";
 import Carts from "./Pages/User/carts";
 import Panier from "./Pages/User/Group";
@@ -42,11 +42,17 @@ import {
 // **************All Imports For Reducer****************
 // *************************************************
 import { useReducer } from "react";
-import { adminReservationReducer, adminReservationStore } from "./reducers/adminReservationReducer";
+import {
+  adminReservationReducer,
+  adminReservationStore,
+} from "./reducers/adminReservationReducer";
 import { authReducer } from "./reducers/authReducer";
 import { categoryReducer, categoryStore } from "./reducers/categoryReducer";
 import { productReducer, productStore } from "./reducers/productReducer";
-import { reservationReducer, reservationStore } from "./reducers/reservationReducer";
+import {
+  reservationReducer,
+  reservationStore,
+} from "./reducers/reservationReducer";
 import {
   productAvailableReducer,
   productAvailableStore,
@@ -99,63 +105,61 @@ function App() {
   const [reservationValue, reservationDispatch] = useReducer(
     reservationReducer,
     reservationStore
-  ); 
+  );
 
   return (
     <>
-    <AuthContext.Provider value={{ auth, authDispatch }}>
-      <CategoryContext.Provider value={{ categoryValue, categoryDispatch }}>
-        <ProductContext.Provider value={{ productValue, productDispatch }}>
-          <ProductAvailableContext.Provider
-            value={{ productAvailableValue, productAvailableDispatch }}
-          >
-            <ReservationContext.Provider
-              value={{ reservationValue, reservationDispatch }}
-            >
-              <AdminReservationContext.Provider value={{ adminReservationValue, adminReservationDispatch }}>
-                <Routes>
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/registration" element={<Registration />} />
-                  <Route path="/admin" element={<AdminLayout />}>
-                    <Route index element={<AdminDashBord />} />
-                    <Route path="category" element={<Category />} />
-                    <Route path="product" element={<Product />} />
-                    <Route
-                      path="product_availables"
-                      element={<ProductAvailable />}
-                    />
+      <AuthContext.Provider value={{ auth, authDispatch }}>
+        <CategoryContext.Provider value={{ categoryValue, categoryDispatch }}>
+          <ProductContext.Provider value={{ productValue, productDispatch }}>
+            <ProductAvailableContext.Provider
+              value={{ productAvailableValue, productAvailableDispatch }}>
+              <ReservationContext.Provider
+                value={{ reservationValue, reservationDispatch }}>
+                <AdminReservationContext.Provider
+                  value={{ adminReservationValue, adminReservationDispatch }}>
+                  <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/registration" element={<Registration />} />
+                    <Route path="/admin" element={<AdminLayout />}>
+                      <Route index element={<AdminDashBord />} />
+                      <Route path="category" element={<Category />} />
+                      <Route path="product" element={<Product />} />
+                      <Route
+                        path="product_availables"
+                        element={<ProductAvailable />}
+                      />
 
-                    <Route path="reservations" element={<Reservations />} />
-                  </Route>
+                      <Route path="reservations" element={<Reservations />} />
+                    </Route>
 
-                  <Route path="/" element={<UserLayout />}>
-                    <Route index element={<Accueil />} />
-                    <Route
-                      path="boutiqueSubSection/:productID"
-                      element={<BoutiqueSubSection />}
-                    />
-                  
-                    <Route
-                      path="boutiqueLandingImgaes"
-                      element={<BoutiqueLandingImgaes />}
-                    />
-                
-                    <Route path="panier" element={<Panier />} />
-                    <Route path="propos" element={<Propos />} />
-                    <Route path="carts" element={<Carts />} />
-                    <Route path="payment" element={<Payment />} />
-                  </Route>
-                </Routes>
-              </AdminReservationContext.Provider>
-            </ReservationContext.Provider>
-          </ProductAvailableContext.Provider>
-        </ProductContext.Provider>
-      </CategoryContext.Provider>
-    </AuthContext.Provider>
-    <ToastContainer />
-  </>
-);
+                    <Route path="/" element={<UserLayout />}>
+                      <Route index element={<Accueil />} />
+                      <Route
+                        path="boutiqueSubSection/:productID"
+                        element={<BoutiqueSubSection />}
+                      />
+
+                      <Route
+                        path="boutiqueLandingImgaes"
+                        element={<BoutiqueLandingImgaes />}
+                      />
+
+                      <Route path="panier" element={<Panier />} />
+                      <Route path="propos" element={<Propos />} />
+                      <Route path="carts" element={<Carts />} />
+                      <Route path="payment" element={<Payment />} />
+                    </Route>
+                  </Routes>
+                </AdminReservationContext.Provider>
+              </ReservationContext.Provider>
+            </ProductAvailableContext.Provider>
+          </ProductContext.Provider>
+        </CategoryContext.Provider>
+      </AuthContext.Provider>
+      <ToastContainer />
+    </>
+  );
 }
-
 
 export default App;

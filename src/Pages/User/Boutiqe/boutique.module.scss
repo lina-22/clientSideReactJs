@@ -1,0 +1,7 @@
+@import "../../../Components/common/style.module.scss";
+.productShowcase {
+  //   border: 1px solid black !important;
+  margin: auto;
+  display: grid !important;
+  grid-template-columns: repeat(5, 1fr) !important;
+}

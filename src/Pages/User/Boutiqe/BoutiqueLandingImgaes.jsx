@@ -1,13 +1,14 @@
-import "../../CSS_User/BoutiqueLandingImages.css";
+import "../../../CSS_User/BoutiqueLandingImages.css";
+import styles from "./boutique.module.scss";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
-import { CategoryContext } from "../../contexts";
+import { CategoryContext } from "../../../contexts";
 import axios from "axios";
-import { BACKEND_URL, IMAGE_URL } from "../../utils";
-import { LOAD_CATEGORIES } from "../../actionTypes";
+import { BACKEND_URL, IMAGE_URL } from "../../../utils";
+import { LOAD_CATEGORIES } from "../../../actionTypes";
 import { toast } from "react-toastify";
 import { Link, useParams } from "react-router-dom";
-import { Product } from "../../Components/Product/SignleProduct/Product";
+import { Product } from "../../../Components/Product/SignleProduct/Product";
 function BoutiqueLandingImgaes() {
   const { categoryValue, categoryDispatch } = useContext(CategoryContext);
   const [catIndex, setCatIndex] = useState(0);
@@ -36,9 +37,12 @@ function BoutiqueLandingImgaes() {
   useEffect(() => {
     getProducts();
   }, []);
+  // useEffect(() => {
+  //   console.log(products);
+  // }, [products]);
   const getProducts = () => {
     axios.get(`${BACKEND_URL}/products`).then((res) => {
-      console.log("products :", res.data);
+      setProducts([...res.data]);
     });
   };
 
@@ -46,6 +50,7 @@ function BoutiqueLandingImgaes() {
     <div className="Bboutique">
       <div className="Blandingboutiqe">
         <h1>Boutique</h1>
+        <h2> Nos Meilleures Offres Idées susceptibles de vous plaire </h2>
       </div>
 
       {/* <Container className="mx-auto">
@@ -120,8 +125,17 @@ function BoutiqueLandingImgaes() {
         </Row>
       </Container> */}
 
-      <Container>
-        <Product></Product>
+      <Container className={`${styles.productShowcase} mx-auto`}>
+        {products.map((product) => {
+          return (
+            <Product
+              name={product.name}
+              description={product.description}
+              price={product.price}
+              image={product.image}
+              discount={product.discount}></Product>
+          );
+        })}
       </Container>
     </div>
   );

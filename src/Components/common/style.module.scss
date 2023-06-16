@@ -1,0 +1,35 @@
+// mixins
+@mixin grid($cols, $mgn) {
+  float: left !important;
+  margin-right: $mgn !important;
+  margin-bottom: $mgn !important;
+  width: ((100% - (($cols - 1) * $mgn)) / $cols) !important;
+  &:nth-child(#{$cols}n) {
+    margin-right: 0 !important;
+  }
+}
+@mixin big-screen {
+  @media (min-width: 1050px) {
+    @include grid(4, 2%);
+  }
+}
+@mixin medium-screen {
+  @media (max-width: 1049px) and (min-width: 600px) {
+    @include grid(3, 2%);
+  }
+}
+@mixin small-screen {
+  @media (max-width: 599px) and (min-width: 480px) {
+    @include grid(2, 2%);
+  }
+}
+@mixin x-small-margin {
+  @media (max-width: 479px) and (min-width: 400px) {
+    @include grid(2, 2%);
+  }
+}
+@mixin xx-small-margin {
+  @media (max-width: 399px) and (min-width: 320px) {
+    @include grid(2, 2%);
+  }
+}

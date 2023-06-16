@@ -49,16 +49,17 @@ function Login() {
         password: state.password,
       })
       .then((res) => {
-        const { status, data, message } = res.data;
-        if (status) {
+        const { status, data } = res;
+        console.log("test logged in : ", res);
+        if (status === 200) {
           authDispatch({
             type: LOG_IN,
             payload: data,
           });
-          toast.success(message);
+          toast.success("Log in successful");
           setState({ email: "", password: "", isLoading: false });
         } else {
-          toast.error(message);
+          toast.error("Something went wrong");
           setState({ ...state, isLoading: false });
         }
       })
