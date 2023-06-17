@@ -9,40 +9,62 @@ import { LOAD_CATEGORIES } from "../../../actionTypes";
 import { toast } from "react-toastify";
 import { Link, useParams } from "react-router-dom";
 import { Product } from "../../../Components/Product/SignleProduct/Product";
+import favori from "../../../Images/favori.png";
 function BoutiqueLandingImgaes() {
   const { categoryValue, categoryDispatch } = useContext(CategoryContext);
   const [catIndex, setCatIndex] = useState(0);
+  const [page, setPage] = useState(0);
+  let size = 20;
 
   const [products, setProducts] = useState([]);
 
+  // useEffect(() => {
+  //   if (!categoryValue.isLoaded) {
+  //     axios
+  //       .get(`${BACKEND_URL}/categories`)
+  //       .then((res) => {
+  //         const { status, data, message } = res.data;
+  //         if (status) {
+  //           categoryDispatch({
+  //             type: LOAD_CATEGORIES,
+  //             payload: data,
+  //           });
+  //         } else {
+  //           toast.error(message);
+  //         }
+  //       })
+  //       .catch();
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   getProductsPaginated();
+  // }, []);
   useEffect(() => {
-    if (!categoryValue.isLoaded) {
-      axios
-        .get(`${BACKEND_URL}/categories`)
-        .then((res) => {
-          const { status, data, message } = res.data;
-          if (status) {
-            categoryDispatch({
-              type: LOAD_CATEGORIES,
-              payload: data,
-            });
-          } else {
-            toast.error(message);
-          }
-        })
-        .catch();
-    }
+    console.log("test efft");
+    getProductsPaginated();
   }, []);
 
-  useEffect(() => {
-    getProducts();
-  }, []);
   // useEffect(() => {
   //   console.log(products);
   // }, [products]);
-  const getProducts = () => {
-    axios.get(`${BACKEND_URL}/products`).then((res) => {
-      setProducts([...res.data]);
+  // const getProducts = () => {
+  //   axios.get(`${BACKEND_URL}/products`).then((res) => {
+  //     setProducts([...res.data]);
+  //   });
+  // };
+  const handleScroll = (e) => {
+    const bottom =
+      e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    if (bottom) {
+      getProductsPaginated();
+    }
+  };
+  const getProductsPaginated = () => {
+    axios.get(`${BACKEND_URL}/products/${page}/${size}`).then((res) => {
+      console.log("res....:", res.data.content);
+      setProducts((products) => [...products, ...res.data.content]);
+      setPage((prevState) => prevState + 1);
     });
   };
 
@@ -125,7 +147,9 @@ function BoutiqueLandingImgaes() {
         </Row>
       </Container> */}
 
-      <Container className={`${styles.productShowcase} mx-auto`}>
+      <Container
+        className={`${styles.productShowcase} mx-auto`}
+        onScroll={handleScroll}>
         {products.map((product) => {
           return (
             <Product
@@ -133,7 +157,10 @@ function BoutiqueLandingImgaes() {
               description={product.description}
               price={product.price}
               image={product.image}
-              discount={product.discount}></Product>
+              discount={product.discount}>
+              * {/* // rate={product.favori} */}
+              {/* <img className="favori" src={favori} alt="" /> */}
+            </Product>
           );
         })}
       </Container>

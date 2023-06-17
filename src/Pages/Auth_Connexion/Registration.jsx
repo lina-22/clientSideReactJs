@@ -58,6 +58,7 @@ function Registration() {
       password: state.password,
       role: "USER",
     };
+    console.log("test user reg  :", newUser);
 
     axios
       .post(`${BACKEND_URL}/users/register`, newUser)
@@ -106,10 +107,10 @@ function Registration() {
             <FormControl
               type="text"
               className="mt-2 py-2 px-3"
-              id="first_name"
+              id="first_Name"
               onChange={onChangeHandler}
               placeholder="First Name"
-              value={state.first_name}
+              value={state.first_Name}
               disabled={state.isLoading}
             />
           </Form.Group>
@@ -119,10 +120,10 @@ function Registration() {
             <FormControl
               type="text"
               className="mt-2 py-2 px-3"
-              id="last_name"
+              id="last_Name"
               onChange={onChangeHandler}
               placeholder="Last Name"
-              value={state.last_name}
+              value={state.last_Name}
               disabled={state.isLoading}
             />
           </Form.Group>

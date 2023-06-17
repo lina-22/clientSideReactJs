@@ -42,7 +42,6 @@ function Login() {
   const onSubmitHandler = (e) => {
     e.preventDefault();
     setState({ ...state, isLoading: true });
-    console.log("test : ", state);
     axios
       .post(`${BACKEND_URL}/login`, {
         username: state.email,

@@ -4,7 +4,7 @@ import panierImg from "../Images/imgPage1/panier_img.png";
 import shoppingCartIcon from "../Images/imgPage1/shopping_cart.svg";
 import menuIcon from "../Images/menu.png";
 import logout from "../Images/logout.png";
-import favori from "../Images/favori.png";
+// import favori from "../Images/favori.png";
 
 import "../CSS_Components/Navbar.css";
 import { useContext } from "react";
@@ -96,10 +96,10 @@ function Navbar() {
               <Link to="/propos"> Propos </Link>
             </li>
             <li>
-              <Link to="/">
+              {/* <Link to="/">
                 {" "}
                 Favori <img className="favori" src={favori} alt="" />
-              </Link>
+              </Link> */}
             </li>
           </ul>
         </nav>

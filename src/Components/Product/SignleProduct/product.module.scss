@@ -1,6 +1,6 @@
 .mainProductCart {
-  width: 220px;
-  min-height: 220px;
+  min-width: 220px;
+  min-height: 310px;
   padding: 8px !important;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
   h4 {
@@ -9,6 +9,7 @@
     padding: 5px !important;
     text-transform: uppercase;
     font-size: 1.2rem;
+    margin-bottom: 10px !important;
   }
   p {
     text-transform: capitalize;

@@ -1,4 +1,5 @@
 import styles from "./product.module.scss";
+import favori from "../../../Images/favori.png";
 // interface Props {
 //   name: string;
 //   description: String;
@@ -26,7 +27,8 @@ export const Product = ({ name, description, price, image, discount }) => {
       <h4>{name}</h4>
       <p>{description}</p>
       <p>{price}€</p>
-      <p>{discount}€</p>
+      <p>{discount}%</p>
+      <img className="favori" src={favori} alt="" />
     </div>
   );
 };
