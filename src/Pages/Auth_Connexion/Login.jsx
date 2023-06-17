@@ -33,7 +33,7 @@ function Login() {
         navigate("/");
       }
     }
-  }, [auth.user]);
+  }, [auth, location.state, navigate]);
 
   const onChangeHandler = (e) => {
     setState({ ...state, [e.target.id]: e.target.value });
@@ -49,8 +49,8 @@ function Login() {
       })
       .then((res) => {
         const { status, data } = res;
-        console.log("test logged in : ", res);
         if (status === 200) {
+          console.log("test logged in : ", data);
           authDispatch({
             type: LOG_IN,
             payload: data,

@@ -46,7 +46,7 @@ import {
   adminReservationReducer,
   adminReservationStore,
 } from "./reducers/adminReservationReducer";
-import { authReducer } from "./reducers/authReducer";
+import { authReducer, userStore } from "./reducers/authReducer";
 import { categoryReducer, categoryStore } from "./reducers/categoryReducer";
 import { productReducer, productStore } from "./reducers/productReducer";
 import {
@@ -85,7 +85,8 @@ function App() {
     adminReservationStore
   );
 
-  const [auth, authDispatch] = useReducer(authReducer, {});
+  // const [auth, authDispatch] = useReducer(authReducer, {});
+  const [auth, authDispatch] = useReducer(authReducer, userStore);
 
   const [categoryValue, categoryDispatch] = useReducer(
     categoryReducer,

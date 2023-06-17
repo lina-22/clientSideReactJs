@@ -2,6 +2,11 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import { LOG_IN, LOG_OUT, SET_USER } from "../actionTypes";
 
+export const userStore = {
+  isLoaded: false,
+  user: {},
+};
+
 export const authReducer = (state, action) => {
   switch (action.type) {
     case LOG_IN:
