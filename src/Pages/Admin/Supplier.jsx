@@ -4,65 +4,62 @@ import { useContext, useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
 import { toast } from "react-toastify";
 import {
-  ADD_CATEGORIES,
-  LOAD_CATEGORIES,
-  UPDATE_CATEGORIES,
+  ADD_SUPPLIERS,
+  LOAD_SUPPLIERS,
+  UPDATE_SUPPLIERS,
 } from "../../actionTypes";
-import CategoryModal from "../../Components/Category/CategoryModal";
-import CategoryTr from "../../Components/Category/CategoryTr";
-import { CategoryContext } from "../../contexts";
 import { BACKEND_URL } from "../../utils";
+import SupplierTr from "../../Components/Supplier/SupplierTr";
 
-import { AuthContext } from "../../contexts";
+import SupplierModal from "../../Components/Supplier/SupplierModal";
+import { SupplierContext } from "../../contexts";
 
-function Category() {
-  const { auth, authDispatch } = useContext(AuthContext);
-  console.log("test auth here in admin category :", auth);
+function Supplier() {
   const [showModal, setShowModal] = useState(false);
-  const { categoryInfo, categoryDispatch } = useContext(CategoryContext);
+  const { supplierInfo, supplierDispatch } = useContext(SupplierContext);
   useEffect(() => {
-    console.log("tes cat load :", categoryInfo);
-  }, [categoryInfo]);
+    console.log("tes supplier load :", supplierDispatch);
+  }, [supplierDispatch]);
   useEffect(() => {
-    if (!categoryInfo.isLoaded) {
+    if (!supplierDispatch.isLoaded) {
       axios
-        .get(`${BACKEND_URL}/categories`)
+        .get(`${BACKEND_URL}/supplier`)
         .then((res) => {
           const { status, data } = res;
 
-          console.log("tes cat load api:", res);
+          console.log("tes supplier load api:", res);
 
           if (status) {
-            categoryDispatch({
-              type: LOAD_CATEGORIES,
+            supplierDispatch({
+              type: LOAD_SUPPLIERS,
               payload: data,
             });
 
-            toast.success("Category loaded");
+            toast.success("Supplier loaded");
           } else {
             toast.error("Something wen wrong");
           }
         })
         .catch();
     }
-  }, []);
+  }, [supplierDispatch]);
 
   const handleShowModal = () => {
     setShowModal((prvSt) => !prvSt);
   };
 
-  const saveCategory = (data) => {
+  const saveSupplier = (data) => {
     axios
-      .post(`${BACKEND_URL}/categories`, data)
+      .post(`${BACKEND_URL}/supplier`, data)
       .then((res) => {
         const { status, data } = res;
         if (status) {
-          categoryDispatch({
-            type: ADD_CATEGORIES,
+          supplierDispatch({
+            type: ADD_SUPPLIERS,
             payload: data,
           });
 
-          toast.success("Category added successfully");
+          toast.success("Supplier added successfully");
           handleShowModal();
         } else {
           toast.error("Something went wrong");
@@ -74,16 +71,16 @@ function Category() {
       });
   };
 
-  const updateCategory = (data) => {
+  const updateSupplier = (data) => {
     console.log("test upd cat :", data);
     axios
-      .put(`${BACKEND_URL}/categories`, data)
+      .put(`${BACKEND_URL}/supplier`, data)
       .then((res) => {
         const { status, data } = res;
-        console.log("test upd cat 2:", res);
+        console.log("test upd sup 2:", res);
         if (status) {
-          categoryDispatch({
-            type: UPDATE_CATEGORIES,
+          supplierDispatch({
+            type: UPDATE_SUPPLIERS,
             payload: data,
           });
 
@@ -102,31 +99,38 @@ function Category() {
   return (
     <Container className="mx-auto">
       <div className="clearfix my-2">
-        <h1 className="float-start">Category</h1>
+        <h1 className="float-start">Supplier</h1>
         <Button
           onClick={handleShowModal}
           className="float-end"
           variant="primary">
-          Add Category
+          Add Supplier
         </Button>
       </div>
 
       <hr />
 
-      {categoryInfo.isLoaded ? (
+      {supplierInfo.isLoaded ? (
         <Table striped bordered hover>
           <thead>
             <tr>
               <th>Id</th>
-              <th>Name</th>
+              <th>Country</th>
+              <th>Company Name</th>
+              <th>Contact Name</th>
+              <th>Address</th>
+              <th>Region</th>
+              <th>Postal code</th>
+              <th>Phone</th>
+              <th>Fax</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {categoryInfo.categories.map((cat, index) => (
-              <CategoryTr
+            {supplierInfo.suppliers.map((supplier, index) => (
+              <SupplierTr
                 handleShowModal={handleShowModal}
-                category={cat}
+                supplier={supplier}
                 key={index}
               />
             ))}
@@ -138,14 +142,14 @@ function Category() {
         </div>
       )}
 
-      <CategoryModal
+      <SupplierModal
         show={showModal}
         handleClose={handleShowModal}
-        saveCategory={saveCategory}
-        updateCategory={updateCategory}
+        saveSupplier={saveSupplier}
+        updateSupplier={updateSupplier}
       />
     </Container>
   );
 }
 
-export default Category;
+export default Supplier;

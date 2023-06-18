@@ -4,7 +4,8 @@ import { LOG_IN, LOG_OUT, SET_USER } from "../actionTypes";
 
 export const userStore = {
   isLoaded: false,
-  user: {},
+  user: undefined,
+  role: undefined,
 };
 
 export const authReducer = (state, action) => {
@@ -16,11 +17,14 @@ export const authReducer = (state, action) => {
       localStorage.setItem("AccessToken", accessToken);
 
       let decodedUser = jwt_decode(action.payload);
-      console.log("in reducer : ", decodedUser);
-      return { user: decodedUser };
+      return {
+        isLoaded: true,
+        user: decodedUser.sub,
+        role: decodedUser.roles[0],
+      };
 
     case SET_USER:
-      return { user: decodedUser };
+      return { isLoaded: true, user: decodedUser };
 
     case LOG_OUT:
       axios.defaults.headers.common = { Authorization: "" };

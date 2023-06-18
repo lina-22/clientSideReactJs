@@ -3,44 +3,36 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
 import { toast } from "react-toastify";
-import {
-  ADD_CATEGORIES,
-  LOAD_CATEGORIES,
-  UPDATE_CATEGORIES,
-} from "../../actionTypes";
-import CategoryModal from "../../Components/Category/CategoryModal";
-import CategoryTr from "../../Components/Category/CategoryTr";
-import { CategoryContext } from "../../contexts";
+import { ADD_COLORS, LOAD_COLORS, UPDATE_COLORS } from "../../actionTypes";
+import ColorModal from "../../Components/Color/ColorModal";
+import ColorTr from "../../Components/Color/ColorTr";
+import { ColorContext } from "../../contexts";
 import { BACKEND_URL } from "../../utils";
 
 import { AuthContext } from "../../contexts";
 
-function Category() {
-  const { auth, authDispatch } = useContext(AuthContext);
-  console.log("test auth here in admin category :", auth);
+function Color() {
   const [showModal, setShowModal] = useState(false);
-  const { categoryInfo, categoryDispatch } = useContext(CategoryContext);
+  const { colorInfo, colorDispatch } = useContext(ColorContext);
+
   useEffect(() => {
-    console.log("tes cat load :", categoryInfo);
-  }, [categoryInfo]);
-  useEffect(() => {
-    if (!categoryInfo.isLoaded) {
+    if (!colorInfo.isLoaded) {
       axios
-        .get(`${BACKEND_URL}/categories`)
+        .get(`${BACKEND_URL}/colours`)
         .then((res) => {
           const { status, data } = res;
 
-          console.log("tes cat load api:", res);
+          console.log("tes color load api:", res);
 
           if (status) {
-            categoryDispatch({
-              type: LOAD_CATEGORIES,
+            colorDispatch({
+              type: LOAD_COLORS,
               payload: data,
             });
 
-            toast.success("Category loaded");
+            toast.success("Color loaded");
           } else {
-            toast.error("Something wen wrong");
+            toast.error("Something went wrong");
           }
         })
         .catch();
@@ -51,18 +43,18 @@ function Category() {
     setShowModal((prvSt) => !prvSt);
   };
 
-  const saveCategory = (data) => {
+  const saveColor = (data) => {
     axios
-      .post(`${BACKEND_URL}/categories`, data)
+      .post(`${BACKEND_URL}/colours`, data)
       .then((res) => {
         const { status, data } = res;
         if (status) {
-          categoryDispatch({
-            type: ADD_CATEGORIES,
+          colorDispatch({
+            type: ADD_COLORS,
             payload: data,
           });
 
-          toast.success("Category added successfully");
+          toast.success("Color added successfully");
           handleShowModal();
         } else {
           toast.error("Something went wrong");
@@ -74,16 +66,16 @@ function Category() {
       });
   };
 
-  const updateCategory = (data) => {
-    console.log("test upd cat :", data);
+  const updateColor = (data) => {
+    console.log("test upd color :", data);
     axios
-      .put(`${BACKEND_URL}/categories`, data)
+      .put(`${BACKEND_URL}/colours`, data)
       .then((res) => {
         const { status, data } = res;
-        console.log("test upd cat 2:", res);
+        console.log("test upd color 2:", res);
         if (status) {
-          categoryDispatch({
-            type: UPDATE_CATEGORIES,
+          colorDispatch({
+            type: UPDATE_COLORS,
             payload: data,
           });
 
@@ -102,18 +94,18 @@ function Category() {
   return (
     <Container className="mx-auto">
       <div className="clearfix my-2">
-        <h1 className="float-start">Category</h1>
+        <h1 className="float-start">Color</h1>
         <Button
           onClick={handleShowModal}
           className="float-end"
           variant="primary">
-          Add Category
+          Add color
         </Button>
       </div>
 
       <hr />
 
-      {categoryInfo.isLoaded ? (
+      {colorInfo.isLoaded ? (
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -123,10 +115,10 @@ function Category() {
             </tr>
           </thead>
           <tbody>
-            {categoryInfo.categories.map((cat, index) => (
-              <CategoryTr
+            {colorInfo.colors.map((cat, index) => (
+              <ColorTr
                 handleShowModal={handleShowModal}
-                category={cat}
+                color={cat}
                 key={index}
               />
             ))}
@@ -138,14 +130,14 @@ function Category() {
         </div>
       )}
 
-      <CategoryModal
+      <ColorModal
         show={showModal}
         handleClose={handleShowModal}
-        saveCategory={saveCategory}
-        updateCategory={updateCategory}
+        saveColor={saveColor}
+        updateColor={updateColor}
       />
     </Container>
   );
 }
 
-export default Category;
+export default Color;

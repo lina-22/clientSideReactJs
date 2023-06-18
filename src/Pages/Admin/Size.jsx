@@ -3,66 +3,56 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
 import { toast } from "react-toastify";
-import {
-  ADD_CATEGORIES,
-  LOAD_CATEGORIES,
-  UPDATE_CATEGORIES,
-} from "../../actionTypes";
-import CategoryModal from "../../Components/Category/CategoryModal";
-import CategoryTr from "../../Components/Category/CategoryTr";
-import { CategoryContext } from "../../contexts";
+import { ADD_SIZES, LOAD_SIZES, UPDATE_SIZES } from "../../actionTypes";
+import SizeModal from "../../Components/Size/SizeModal";
+import SizeTr from "../../Components/Size/SizeTr";
+import { SizeContext } from "../../contexts";
 import { BACKEND_URL } from "../../utils";
 
-import { AuthContext } from "../../contexts";
-
-function Category() {
-  const { auth, authDispatch } = useContext(AuthContext);
-  console.log("test auth here in admin category :", auth);
+function Size() {
   const [showModal, setShowModal] = useState(false);
-  const { categoryInfo, categoryDispatch } = useContext(CategoryContext);
+  const { sizeInfo, sizeDispatch } = useContext(SizeContext);
+
   useEffect(() => {
-    console.log("tes cat load :", categoryInfo);
-  }, [categoryInfo]);
-  useEffect(() => {
-    if (!categoryInfo.isLoaded) {
+    if (!sizeInfo.isLoaded) {
       axios
-        .get(`${BACKEND_URL}/categories`)
+        .get(`${BACKEND_URL}/sizes`)
         .then((res) => {
           const { status, data } = res;
 
-          console.log("tes cat load api:", res);
+          console.log("tes size load api:", res);
 
           if (status) {
-            categoryDispatch({
-              type: LOAD_CATEGORIES,
+            sizeDispatch({
+              type: LOAD_SIZES,
               payload: data,
             });
 
-            toast.success("Category loaded");
+            toast.success("Size loaded");
           } else {
-            toast.error("Something wen wrong");
+            toast.error("Something went wrong");
           }
         })
         .catch();
     }
-  }, []);
+  }, [sizeDispatch, sizeInfo.isLoaded]);
 
   const handleShowModal = () => {
     setShowModal((prvSt) => !prvSt);
   };
 
-  const saveCategory = (data) => {
+  const saveSize = (data) => {
     axios
-      .post(`${BACKEND_URL}/categories`, data)
+      .post(`${BACKEND_URL}/sizes`, data)
       .then((res) => {
         const { status, data } = res;
         if (status) {
-          categoryDispatch({
-            type: ADD_CATEGORIES,
+          sizeDispatch({
+            type: ADD_SIZES,
             payload: data,
           });
 
-          toast.success("Category added successfully");
+          toast.success("Size added successfully");
           handleShowModal();
         } else {
           toast.error("Something went wrong");
@@ -74,16 +64,16 @@ function Category() {
       });
   };
 
-  const updateCategory = (data) => {
-    console.log("test upd cat :", data);
+  const updateSize = (data) => {
+    console.log("test upd size :", data);
     axios
-      .put(`${BACKEND_URL}/categories`, data)
+      .put(`${BACKEND_URL}/sizes`, data)
       .then((res) => {
         const { status, data } = res;
-        console.log("test upd cat 2:", res);
+        console.log("test upd size 2:", res);
         if (status) {
-          categoryDispatch({
-            type: UPDATE_CATEGORIES,
+          sizeDispatch({
+            type: UPDATE_SIZES,
             payload: data,
           });
 
@@ -102,18 +92,18 @@ function Category() {
   return (
     <Container className="mx-auto">
       <div className="clearfix my-2">
-        <h1 className="float-start">Category</h1>
+        <h1 className="float-start">Size</h1>
         <Button
           onClick={handleShowModal}
           className="float-end"
           variant="primary">
-          Add Category
+          Add size
         </Button>
       </div>
 
       <hr />
 
-      {categoryInfo.isLoaded ? (
+      {sizeInfo.isLoaded ? (
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -123,10 +113,10 @@ function Category() {
             </tr>
           </thead>
           <tbody>
-            {categoryInfo.categories.map((cat, index) => (
-              <CategoryTr
+            {sizeInfo.sizes.map((size, index) => (
+              <SizeTr
                 handleShowModal={handleShowModal}
-                category={cat}
+                color={size}
                 key={index}
               />
             ))}
@@ -138,14 +128,14 @@ function Category() {
         </div>
       )}
 
-      <CategoryModal
+      <SizeModal
         show={showModal}
         handleClose={handleShowModal}
-        saveCategory={saveCategory}
-        updateCategory={updateCategory}
+        savecolor={saveSize}
+        updateSize={updateSize}
       />
     </Container>
   );
 }
 
-export default Category;
+export default Size;

@@ -1,28 +1,27 @@
 import { useContext, useEffect, useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
-import { REMOVE_CATEGORIES } from "../../actionTypes";
-import { CategoryContext } from "../../contexts";
+import { REMOVE_SIZES } from "../../actionTypes";
+import { SizeContext } from "../../contexts";
 
-function CategoryModal({ show, handleClose, saveCategory, updateCategory }) {
-  const { categoryInfo, categoryDispatch } = useContext(CategoryContext);
+function SizeModal({ show, handleClose, saveSize, updateSize }) {
+  const { sizeInfo, sizeDispatch } = useContext(SizeContext);
   const [state, setState] = useState({
-    categoryId: "",
-    categoryValue: "",
+    sizeId: "",
+    sizeValue: "",
     isLoading: false,
   });
 
   useEffect(() => {
-    if (categoryInfo.selectedCategory) {
-      console.log("test cat :", categoryInfo.selectedCategory);
+    if (sizeInfo.selectedSize) {
       setState((prvSt) => {
         return {
           ...prvSt,
-          categoryId: categoryInfo.selectedCategory.categoryId,
-          categoryValue: categoryInfo.selectedCategory.categoryValue,
+          sizeId: sizeInfo.selectedSize.sizeId,
+          sizeValue: sizeInfo.selectedSize.sizeValue,
         };
       });
     }
-  }, [categoryInfo, show]);
+  }, [sizeInfo, show]);
 
   const onChangeHandler = (e) => {
     setState((prvSt) => {
@@ -37,20 +36,20 @@ function CategoryModal({ show, handleClose, saveCategory, updateCategory }) {
     e.preventDefault();
     setState((prevSt) => ({ ...prevSt, isLoading: true }));
 
-    if (categoryInfo.selectedCategory) {
-      updateCategory(state);
+    if (sizeInfo.selectedsize) {
+      updateSize(state);
     } else {
-      saveCategory(state);
+      saveSize(state);
     }
   };
 
   const resetState = () => {
-    categoryDispatch({ type: REMOVE_CATEGORIES });
+    sizeDispatch({ type: REMOVE_SIZES });
 
     setTimeout(() => {
       setState({
-        categoryId: "",
-        categoryValue: "",
+        sizeId: "",
+        sizeValue: "",
         isLoading: false,
       });
     }, 5);
@@ -60,19 +59,19 @@ function CategoryModal({ show, handleClose, saveCategory, updateCategory }) {
     <Modal show={show} onHide={handleClose} onExit={resetState}>
       <Modal.Header closeButton>
         <Modal.Title>
-          {categoryInfo.selectedCategory ? "Edit category" : "Add New Category"}
+          {sizeInfo.selectedSize ? "Edit size" : "Add New Size"}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={onSubmitHandler}>
           <Form.Group className="mb-3" controlId="cat_name">
-            <Form.Label>Category Name</Form.Label>
+            <Form.Label>Size</Form.Label>
             <Form.Control
               onChange={onChangeHandler}
               type="text"
-              name="categoryValue"
-              value={state.categoryValue}
-              placeholder="Ex: Ladies"
+              name="sizeValue"
+              value={state.sizeValue}
+              placeholder="Ex: M"
               disabled={state.isLoading}
             />
           </Form.Group>
@@ -85,4 +84,4 @@ function CategoryModal({ show, handleClose, saveCategory, updateCategory }) {
   );
 }
 
-export default CategoryModal;
+export default SizeModal;

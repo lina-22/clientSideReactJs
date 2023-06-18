@@ -56,7 +56,7 @@ function Registration() {
       lastName: state.last_Name,
       email: state.email,
       password: state.password,
-      role: "USER",
+      role: "ADMIN",
     };
     console.log("test user reg  :", newUser);
 

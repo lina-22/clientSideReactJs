@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logoImg from "../Images/IF.JPG";
 import panierImg from "../Images/imgPage1/panier_img.png";
 import shoppingCartIcon from "../Images/imgPage1/shopping_cart.svg";
@@ -82,7 +82,7 @@ function Navbar() {
             </li>
             <li>
               {auth.user ? (
-                <Link to="#" onClick={logOutHandler}>
+                <Link to="/" onClick={logOutHandler}>
                   Disconnexion{" "}
                 </Link>
               ) : (
@@ -95,12 +95,11 @@ function Navbar() {
             <li>
               <Link to="/propos"> Propos </Link>
             </li>
-            <li>
-              {/* <Link to="/">
-                {" "}
-                Favori <img className="favori" src={favori} alt="" />
-              </Link> */}
-            </li>
+            {auth.role === "ADMIN" && (
+              <li>
+                <Link to="/admin">Admin</Link>
+              </li>
+            )}
           </ul>
         </nav>
       </section>

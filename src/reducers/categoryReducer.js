@@ -30,15 +30,20 @@ export const categoryReducer = (state, action) => {
       return { ...state, selectedCategory: null };
     case UPDATE_CATEGORIES:
       const oldCategories = state.categories;
-      const index =  oldCategories.findIndex(cat => cat.id === action.payload.id);
+      const index = oldCategories.findIndex(
+        (cat) => cat.categoryId === action.payload.categoryId
+      );
       oldCategories[index] = action.payload;
 
-      return{
-        ...state, categories: oldCategories
-      }
+      return {
+        ...state,
+        categories: oldCategories,
+      };
 
     case DELETE_CATEGORIES:
-      let cats = state.categories.filter((e) => e.id !== action.payload);
+      let cats = state.categories.filter(
+        (e) => e.categoryId !== action.payload
+      );
       return {
         ...state,
         categories: cats,

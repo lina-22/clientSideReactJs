@@ -19,20 +19,20 @@ function Accueil() {
     products: [],
     categories: [],
   });
-  useEffect(() => {
-    axios
-      .get(`${BACKEND_URL}/gethomedata`)
-      .then((res) => {
-        const responseData = res.data;
+  // useEffect(() => {
+  //   axios
+  //     .get(`${BACKEND_URL}/gethomedata`)
+  //     .then((res) => {
+  //       const responseData = res.data;
 
-        if (responseData.status === true) {
-          setState(responseData.data);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  //       if (responseData.status === true) {
+  //         setState(responseData.data);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   return (
     <div>

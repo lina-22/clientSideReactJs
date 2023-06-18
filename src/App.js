@@ -5,6 +5,9 @@ import { Routes, Route } from "react-router-dom";
 import AdminLayout from "./Components/AdminLayout";
 import AdminDashBord from "./Pages/Admin/AdminDashBord";
 import Category from "./Pages/Admin/Category";
+import Size from "./Pages/Admin/Size";
+import Color from "./Pages/Admin/Color";
+import Supplier from "./Pages/Admin/Supplier";
 import Product from "./Pages/Admin/Product";
 import ProductAvailable from "./Pages/Admin/ProductAvailable";
 import Reservations from "./Pages/Admin/Reservations";
@@ -32,6 +35,9 @@ import Registration from "./Pages/Auth_Connexion/Registration";
 import {
   AuthContext,
   CategoryContext,
+  ColorContext,
+  SizeContext,
+  SupplierContext,
   ProductContext,
   ProductAvailableContext,
   ReservationContext,
@@ -48,6 +54,9 @@ import {
 } from "./reducers/adminReservationReducer";
 import { authReducer, userStore } from "./reducers/authReducer";
 import { categoryReducer, categoryStore } from "./reducers/categoryReducer";
+import { colorReducer, colorStore } from "./reducers/colorReducer";
+import { sizeReducer, sizeStore } from "./reducers/sizeReducer";
+import { supplierReducer, supplierStore } from "./reducers/supplierReducer";
 import { productReducer, productStore } from "./reducers/productReducer";
 import {
   reservationReducer,
@@ -88,9 +97,15 @@ function App() {
   // const [auth, authDispatch] = useReducer(authReducer, {});
   const [auth, authDispatch] = useReducer(authReducer, userStore);
 
-  const [categoryValue, categoryDispatch] = useReducer(
+  const [categoryInfo, categoryDispatch] = useReducer(
     categoryReducer,
     categoryStore
+  );
+  const [colorInfo, colorDispatch] = useReducer(colorReducer, colorStore);
+  const [sizeInfo, sizeDispatch] = useReducer(sizeReducer, sizeStore);
+  const [supplierInfo, supplierDispatch] = useReducer(
+    supplierReducer,
+    supplierStore
   );
 
   const [productAvailableValue, productAvailableDispatch] = useReducer(
@@ -111,51 +126,72 @@ function App() {
   return (
     <>
       <AuthContext.Provider value={{ auth, authDispatch }}>
-        <CategoryContext.Provider value={{ categoryValue, categoryDispatch }}>
-          <ProductContext.Provider value={{ productValue, productDispatch }}>
-            <ProductAvailableContext.Provider
-              value={{ productAvailableValue, productAvailableDispatch }}>
-              <ReservationContext.Provider
-                value={{ reservationValue, reservationDispatch }}>
-                <AdminReservationContext.Provider
-                  value={{ adminReservationValue, adminReservationDispatch }}>
-                  <Routes>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/registration" element={<Registration />} />
-                    <Route path="/admin" element={<AdminLayout />}>
-                      <Route index element={<AdminDashBord />} />
-                      <Route path="category" element={<Category />} />
-                      <Route path="product" element={<Product />} />
-                      <Route
-                        path="product_availables"
-                        element={<ProductAvailable />}
-                      />
+        <CategoryContext.Provider value={{ categoryInfo, categoryDispatch }}>
+          <ColorContext.Provider value={{ colorInfo, colorDispatch }}>
+            <SizeContext.Provider value={{ sizeInfo, sizeDispatch }}>
+              <SupplierContext.Provider
+                value={{ supplierInfo, supplierDispatch }}>
+                <ProductContext.Provider
+                  value={{ productValue, productDispatch }}>
+                  <ProductAvailableContext.Provider
+                    value={{ productAvailableValue, productAvailableDispatch }}>
+                    <ReservationContext.Provider
+                      value={{ reservationValue, reservationDispatch }}>
+                      <AdminReservationContext.Provider
+                        value={{
+                          adminReservationValue,
+                          adminReservationDispatch,
+                        }}>
+                        <Routes>
+                          <Route path="/login" element={<Login />} />
+                          <Route
+                            path="/registration"
+                            element={<Registration />}
+                          />
+                          <Route path="/admin" element={<AdminLayout />}>
+                            <Route index element={<AdminDashBord />} />
+                            <Route path="category" element={<Category />} />
+                            <Route path="size" element={<Size />} />
+                            <Route path="color" element={<Color />} />
+                            <Route path="supplier" element={<Supplier />} />
+                            <Route path="product" element={<Product />} />
+                            <Route
+                              path="product_availables"
+                              element={<ProductAvailable />}
+                            />
 
-                      <Route path="reservations" element={<Reservations />} />
-                    </Route>
+                            <Route
+                              path="reservations"
+                              element={<Reservations />}
+                            />
+                          </Route>
 
-                    <Route path="/" element={<UserLayout />}>
-                      <Route index element={<Accueil />} />
-                      <Route
-                        path="boutiqueSubSection/:productID"
-                        element={<BoutiqueSubSection />}
-                      />
+                          <Route path="/" element={<UserLayout />}>
+                            <Route index element={<Accueil />} />
+                            <Route
+                              path="boutiqueSubSection/:productID"
+                              element={<BoutiqueSubSection />}
+                            />
 
-                      <Route
-                        path="boutiqueLandingImgaes"
-                        element={<BoutiqueLandingImgaes />}
-                      />
+                            <Route
+                              path="boutiqueLandingImgaes"
+                              element={<BoutiqueLandingImgaes />}
+                            />
 
-                      <Route path="panier" element={<Panier />} />
-                      <Route path="propos" element={<Propos />} />
-                      <Route path="carts" element={<Carts />} />
-                      <Route path="payment" element={<Payment />} />
-                    </Route>
-                  </Routes>
-                </AdminReservationContext.Provider>
-              </ReservationContext.Provider>
-            </ProductAvailableContext.Provider>
-          </ProductContext.Provider>
+                            <Route path="panier" element={<Panier />} />
+                            <Route path="propos" element={<Propos />} />
+                            <Route path="carts" element={<Carts />} />
+                            <Route path="payment" element={<Payment />} />
+                            <Route path="category" element={<Category />} />
+                          </Route>
+                        </Routes>
+                      </AdminReservationContext.Provider>
+                    </ReservationContext.Provider>
+                  </ProductAvailableContext.Provider>
+                </ProductContext.Provider>
+              </SupplierContext.Provider>
+            </SizeContext.Provider>
+          </ColorContext.Provider>
         </CategoryContext.Provider>
       </AuthContext.Provider>
       <ToastContainer />

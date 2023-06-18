@@ -1,28 +1,27 @@
 import { useContext, useEffect, useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
-import { REMOVE_CATEGORIES } from "../../actionTypes";
-import { CategoryContext } from "../../contexts";
+import { REMOVE_COLORS } from "../../actionTypes";
+import { ColorContext } from "../../contexts";
 
-function CategoryModal({ show, handleClose, saveCategory, updateCategory }) {
-  const { categoryInfo, categoryDispatch } = useContext(CategoryContext);
+function ColorModal({ show, handleClose, saveColor, updateColor }) {
+  const { colorInfo, colorDispatch } = useContext(ColorContext);
   const [state, setState] = useState({
-    categoryId: "",
-    categoryValue: "",
+    colorId: "",
+    colorValue: "",
     isLoading: false,
   });
 
   useEffect(() => {
-    if (categoryInfo.selectedCategory) {
-      console.log("test cat :", categoryInfo.selectedCategory);
+    if (colorInfo.selectedColor) {
       setState((prvSt) => {
         return {
           ...prvSt,
-          categoryId: categoryInfo.selectedCategory.categoryId,
-          categoryValue: categoryInfo.selectedCategory.categoryValue,
+          colourId: colorInfo.selectedColor.colourId,
+          colourValue: colorInfo.selectedColor.colourValue,
         };
       });
     }
-  }, [categoryInfo, show]);
+  }, [colorInfo, show]);
 
   const onChangeHandler = (e) => {
     setState((prvSt) => {
@@ -37,20 +36,20 @@ function CategoryModal({ show, handleClose, saveCategory, updateCategory }) {
     e.preventDefault();
     setState((prevSt) => ({ ...prevSt, isLoading: true }));
 
-    if (categoryInfo.selectedCategory) {
-      updateCategory(state);
+    if (colorInfo.selectedColor) {
+      updateColor(state);
     } else {
-      saveCategory(state);
+      saveColor(state);
     }
   };
 
   const resetState = () => {
-    categoryDispatch({ type: REMOVE_CATEGORIES });
+    colorDispatch({ type: REMOVE_COLORS });
 
     setTimeout(() => {
       setState({
-        categoryId: "",
-        categoryValue: "",
+        ColorId: "",
+        ColorValue: "",
         isLoading: false,
       });
     }, 5);
@@ -60,19 +59,19 @@ function CategoryModal({ show, handleClose, saveCategory, updateCategory }) {
     <Modal show={show} onHide={handleClose} onExit={resetState}>
       <Modal.Header closeButton>
         <Modal.Title>
-          {categoryInfo.selectedCategory ? "Edit category" : "Add New Category"}
+          {colorInfo.selectedColor ? "Edit Color" : "Add New Color"}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={onSubmitHandler}>
           <Form.Group className="mb-3" controlId="cat_name">
-            <Form.Label>Category Name</Form.Label>
+            <Form.Label>Color</Form.Label>
             <Form.Control
               onChange={onChangeHandler}
               type="text"
-              name="categoryValue"
-              value={state.categoryValue}
-              placeholder="Ex: Ladies"
+              name="colourValue"
+              value={state.colourValue}
+              placeholder="Ex: Red"
               disabled={state.isLoading}
             />
           </Form.Group>
@@ -85,4 +84,4 @@ function CategoryModal({ show, handleClose, saveCategory, updateCategory }) {
   );
 }
 
-export default CategoryModal;
+export default ColorModal;

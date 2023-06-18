@@ -2,22 +2,22 @@ import axios from "axios";
 import { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { DELETE_CATEGORIES, SELECT_CATEGORIES } from "../../actionTypes";
-import { CategoryContext } from "../../contexts";
+import { DELETE_SUPPLIERS, SELECT_SUPPLIERS } from "../../actionTypes";
+import { SupplierContext } from "../../contexts";
 import { BACKEND_URL } from "../../utils";
 
-function CategoryTr({ category, handleShowModal }) {
-  const { categoryDispatch } = useContext(CategoryContext);
+function SupplierTr({ supplier, handleShowModal }) {
+  const { supplierDispatch } = useContext(SupplierContext);
 
-  const deleteCategory = (id) => {
+  const deleteSupplier = (id) => {
     if (window.confirm("Are You Sure?")) {
       axios
-        .delete(`${BACKEND_URL}/categories/${id}`)
+        .delete(`${BACKEND_URL}/supplier/${id}`)
         .then((res) => {
           const { status } = res;
           if (status) {
-            categoryDispatch({
-              type: DELETE_CATEGORIES,
+            supplierDispatch({
+              type: DELETE_SUPPLIERS,
               payload: id,
             });
 
@@ -32,25 +32,33 @@ function CategoryTr({ category, handleShowModal }) {
         });
     }
   };
-  const editHandler = (cat) => {
-    categoryDispatch({
-      type: SELECT_CATEGORIES,
-      payload: cat,
+  const editHandler = (supplier) => {
+    supplierDispatch({
+      type: SELECT_SUPPLIERS,
+      payload: supplier,
     });
     handleShowModal();
   };
 
   return (
     <tr>
-      <td>{category.categoryId}</td>
-      <td>{category.categoryValue}</td>
+      <td>{supplier.contactTitle}</td>
+      <td>{supplier.contactName}</td>
+      <td>{supplier.companyName}</td>
+      <td>{supplier.supplierCountry}</td>
+      <td>{supplier.address}</td>
+      <td>{supplier.region}</td>
+      <td>{supplier.postalCode}</td>
+      <td>{supplier.phone}</td>
+      <td>{supplier.fax}</td>
+      <td>{supplier.contactTitle}</td>
       <td>
         <Button
           type="button"
           variant="warning"
           size="sm"
           className="mx-1"
-          onClick={() => editHandler(category)}>
+          onClick={() => editHandler(supplier)}>
           Edit
         </Button>
         <Button
@@ -58,7 +66,7 @@ function CategoryTr({ category, handleShowModal }) {
           variant="danger"
           size="sm"
           className="mx-1"
-          onClick={() => deleteCategory(category.categoryId)}>
+          onClick={() => deleteSupplier(supplier.supplierId)}>
           Delete
         </Button>
       </td>
@@ -66,4 +74,4 @@ function CategoryTr({ category, handleShowModal }) {
   );
 }
 
-export default CategoryTr;
+export default SupplierTr;

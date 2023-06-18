@@ -13,9 +13,11 @@ import logout from "../Images/logout.png";
 function AdminLayout() {
   const { auth, authDispatch } = useContext(AuthContext);
   const { products, productsDispatch } = useContext(ProductContext);
+  console.log("test auth here in admin  :", auth);
   const navigate = useNavigate();
   const logOutHandler = () => {
     authDispatch({ type: LOG_OUT });
+    navigate("/");
   };
   // useEffect(() => {
   //   if (!auth.user) {
@@ -46,11 +48,11 @@ function AdminLayout() {
   //   }
   // }, [auth.user]);
 
-  useEffect(() => {
-    console.log("test admin layout :", products);
-    if (!auth.user) {
-    }
-  }, [auth]);
+  // useEffect(() => {
+  //   console.log('test admin layout :', auth, products)
+  //   if (!auth.user) {
+  //   }
+  // }, [auth, products])
 
   return (
     <Container className="mx-auto">
@@ -95,16 +97,32 @@ function AdminLayout() {
                   Product
                 </Link>
               </Nav.Item>
-              <Nav.Item>
-                <Link className="nav-link mx-3" to="/admin/product_availables">
+              {/* <Nav.Item>
+                <Link className='nav-link mx-3' to='/admin/product_availables'>
                   ProductAvailable
                 </Link>
-              </Nav.Item>
+              </Nav.Item> */}
               <Nav.Item>
-                <Link className="nav-link mx-3" to="">
-                  ProductLine
+                <Link className="nav-link mx-3" to="/admin/color">
+                  Color
                 </Link>
               </Nav.Item>
+              <Nav.Item>
+                <Link className="nav-link mx-3" to="/admin/size">
+                  Size
+                </Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Link className="nav-link mx-3" to="/admin/supplier">
+                  Supplier
+                </Link>
+              </Nav.Item>
+
+              {/* <Nav.Item>
+                <Link className='nav-link mx-3' to=''>
+                  ProductLine
+                </Link>
+              </Nav.Item> */}
               <Nav.Item>
                 <Link className="nav-link mx-3" to="/admin/reservations">
                   Reservation

@@ -17,11 +17,11 @@ function Login() {
     isLoading: false,
   });
 
-  useEffect(() => {
-    if (auth.user) {
-      navigate("/");
-    }
-  });
+  // useEffect(() => {
+  //   if (auth.user) {
+  //     navigate('/')
+  //   }
+  // })
 
   const location = useLocation();
 
@@ -30,7 +30,7 @@ function Login() {
       if (location.state) {
         navigate(location.state.prevLocation);
       } else {
-        navigate("/");
+        navigate(auth.role === "ADMIN" ? "/admin" : "/");
       }
     }
   }, [auth, location.state, navigate]);

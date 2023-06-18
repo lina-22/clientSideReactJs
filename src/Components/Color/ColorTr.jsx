@@ -2,22 +2,22 @@ import axios from "axios";
 import { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { DELETE_CATEGORIES, SELECT_CATEGORIES } from "../../actionTypes";
-import { CategoryContext } from "../../contexts";
+import { DELETE_COLORS, SELECT_COLORS } from "../../actionTypes";
+import { ColorContext } from "../../contexts";
 import { BACKEND_URL } from "../../utils";
 
-function CategoryTr({ category, handleShowModal }) {
-  const { categoryDispatch } = useContext(CategoryContext);
+function ColorTr({ color, handleShowModal }) {
+  const { colorDispatch } = useContext(ColorContext);
 
-  const deleteCategory = (id) => {
+  const deleteColor = (id) => {
     if (window.confirm("Are You Sure?")) {
       axios
-        .delete(`${BACKEND_URL}/categories/${id}`)
+        .delete(`${BACKEND_URL}/colours/${id}`)
         .then((res) => {
           const { status } = res;
           if (status) {
-            categoryDispatch({
-              type: DELETE_CATEGORIES,
+            colorDispatch({
+              type: DELETE_COLORS,
               payload: id,
             });
 
@@ -32,33 +32,33 @@ function CategoryTr({ category, handleShowModal }) {
         });
     }
   };
-  const editHandler = (cat) => {
-    categoryDispatch({
-      type: SELECT_CATEGORIES,
-      payload: cat,
+  const editHandler = (color) => {
+    colorDispatch({
+      type: SELECT_COLORS,
+      payload: color,
     });
     handleShowModal();
   };
 
   return (
     <tr>
-      <td>{category.categoryId}</td>
-      <td>{category.categoryValue}</td>
+      <td>{color.colourId}</td>
+      <td>{color.colourValue}</td>
       <td>
         <Button
           type="button"
           variant="warning"
-          size="sm"
+          Color="sm"
           className="mx-1"
-          onClick={() => editHandler(category)}>
+          onClick={() => editHandler(color)}>
           Edit
         </Button>
         <Button
           type="button"
           variant="danger"
-          size="sm"
+          Color="sm"
           className="mx-1"
-          onClick={() => deleteCategory(category.categoryId)}>
+          onClick={() => deleteColor(color.colourId)}>
           Delete
         </Button>
       </td>
@@ -66,4 +66,4 @@ function CategoryTr({ category, handleShowModal }) {
   );
 }
 
-export default CategoryTr;
+export default ColorTr;
