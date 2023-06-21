@@ -13,6 +13,7 @@ import { LOG_IN } from "../../actionTypes";
 import { AuthContext } from "../../contexts";
 import { BACKEND_URL } from "../../utils";
 import styles from "./registration.module.scss";
+import logo from "../../Images/logo.jpg";
 
 function Registration() {
   const { auth, authDispatch } = useContext(AuthContext);
@@ -97,6 +98,15 @@ function Registration() {
     <main
       // className="mx-auto d-flex justify-content-center align-items-center btn-dark"
       className={`${styles.main}`}>
+      <section className="pb-5">
+        <Link to="/">
+          <img
+            src={logo}
+            alt="logo"
+            style={{ height: "80px", width: "120px", cursor: "pointer" }}
+          />
+        </Link>
+      </section>
       <section>
         <Form onSubmit={onSubmitHandler}>
           <h2>Créer Un Compte</h2>
