@@ -113,10 +113,10 @@ function Size() {
             </tr>
           </thead>
           <tbody>
-            {sizeInfo.sizes.map((size, index) => (
+            {sizeInfo?.sizes?.map((size, index) => (
               <SizeTr
                 handleShowModal={handleShowModal}
-                color={size}
+                size={size}
                 key={index}
               />
             ))}
@@ -131,7 +131,7 @@ function Size() {
       <SizeModal
         show={showModal}
         handleClose={handleShowModal}
-        savecolor={saveSize}
+        saveSize={saveSize}
         updateSize={updateSize}
       />
     </Container>

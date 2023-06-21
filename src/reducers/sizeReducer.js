@@ -16,9 +16,10 @@ export const sizeStore = {
 export const sizeReducer = (state, action) => {
   switch (action.type) {
     case LOAD_SIZES:
+      console.log("test sizes : ", action.payload);
       return {
         isLoaded: true,
-        size: action.payload,
+        sizes: action.payload,
         selectedSize: null,
       };
 

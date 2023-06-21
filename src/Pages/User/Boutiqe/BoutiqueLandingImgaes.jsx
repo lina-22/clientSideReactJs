@@ -14,7 +14,7 @@ function BoutiqueLandingImgaes() {
   const { categoryValue, categoryDispatch } = useContext(CategoryContext);
   const [catIndex, setCatIndex] = useState(0);
   const [page, setPage] = useState(0);
-  let size = 20;
+  let size = 10;
 
   const [products, setProducts] = useState([]);
 
@@ -150,17 +150,15 @@ function BoutiqueLandingImgaes() {
       <Container
         className={`${styles.productShowcase} mx-auto`}
         onScroll={handleScroll}>
-        {products.map((product) => {
+        {products.map((product, index) => {
           return (
             <Product
+              key={index}
               name={product.name}
               description={product.description}
               price={product.price}
               image={product.image}
-              discount={product.discount}>
-              * {/* // rate={product.favori} */}
-              {/* <img className="favori" src={favori} alt="" /> */}
-            </Product>
+              discount={product.discount}></Product>
           );
         })}
       </Container>

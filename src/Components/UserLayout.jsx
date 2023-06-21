@@ -13,33 +13,33 @@ function UserLayout() {
   const { reservationValue, reservationDispatch } =
     useContext(ReservationContext);
 
-    useEffect(() => {
-      if (auth.user) {
-        if (!reservationValue.isLoaded) {
-          axios.get(`${BACKEND_URL}/productsLine`).then((res) => {
-            let { status, message, data } = res.data;
-            if (status) {
-              reservationDispatch({ type: SET_RESERVATION, payload: data });
-            }
-          });
-        }
-      }else{
-          if (!auth.user) {
-            axios
-              .get(`${BACKEND_URL}/profile`)
-              .then((res) => {
-                const { status, data, message } = res.data;
-                if (status) {
-                  authDispatch({
-                    type: SET_USER,
-                    payload: data,
-                  });
-                }
-              })
-          }
-      }
-    }, [auth.user]);
-  
+  // useEffect(() => {
+  //   if (auth.user) {
+  //     if (!reservationValue.isLoaded) {
+  //       axios.get(`${BACKEND_URL}/productsLine`).then((res) => {
+  //         let { status, message, data } = res.data;
+  //         if (status) {
+  //           reservationDispatch({ type: SET_RESERVATION, payload: data });
+  //         }
+  //       });
+  //     }
+  //   }else{
+  //       if (!auth.user) {
+  //         axios
+  //           .get(`${BACKEND_URL}/profile`)
+  //           .then((res) => {
+  //             const { status, data, message } = res.data;
+  //             if (status) {
+  //               authDispatch({
+  //                 type: SET_USER,
+  //                 payload: data,
+  //               });
+  //             }
+  //           })
+  //       }
+  //   }
+  // }, [auth.user]);
+
   return (
     <div className="main">
       <div id="landing">

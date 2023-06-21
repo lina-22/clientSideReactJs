@@ -42,8 +42,8 @@ function SizeTr({ size, handleShowModal }) {
 
   return (
     <tr>
-      <td>{size.sizeId}</td>
-      <td>{size.sizeValue}</td>
+      <td>{size?.sizeId}</td>
+      <td>{size?.sizeValue}</td>
       <td>
         <Button
           type="button"
@@ -58,7 +58,7 @@ function SizeTr({ size, handleShowModal }) {
           variant="danger"
           size="sm"
           className="mx-1"
-          onClick={() => deleteSize(size.SizeId)}>
+          onClick={() => deleteSize(size.sizeId)}>
           Delete
         </Button>
       </td>
