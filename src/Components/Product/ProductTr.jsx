@@ -14,7 +14,7 @@ function ProductTr({ product, handleShowModal, handleAttatchModal }) {
       axios
         .delete(`${BACKEND_URL}/products/${id}`)
         .then((res) => {
-          const { status, message } = res.data;
+          const { status, data } = res;
 
           if (status) {
             productDispatch({
@@ -22,9 +22,9 @@ function ProductTr({ product, handleShowModal, handleAttatchModal }) {
               payload: id,
             });
 
-            toast.success(message);
+            toast.success(data);
           } else {
-            toast.error(message);
+            toast.error(data);
           }
         })
         .catch((err) => {
@@ -53,14 +53,19 @@ function ProductTr({ product, handleShowModal, handleAttatchModal }) {
 
   return (
     <tr>
-      <td>{product.id}</td>
       <td>{product.name}</td>
-      <td>{product.is_featured}</td>
-      <td>&euro;{product.price}</td>
+      <td>{product.price}&euro;</td>
       <td>{product.discount}%</td>
       <td>
-        {product.image && (
-          <img width={100} src={`${IMAGE_URL}/${product.image}`} />
+        {product.image ? (
+          <img
+            width={50}
+            height={70}
+            src={`data:image/jpeg;base64, ${product.image} `}
+            alt="product img"
+          />
+        ) : (
+          ""
         )}
       </td>
       <td>{product.description}</td>
@@ -76,7 +81,7 @@ function ProductTr({ product, handleShowModal, handleAttatchModal }) {
           variant="danger"
           size="sm"
           className="mx-1"
-          onClick={() => deleteProduct(product.id)}>
+          onClick={() => deleteProduct(product.productId)}>
           Delete
         </Button>
 

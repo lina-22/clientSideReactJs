@@ -17,9 +17,7 @@ import { SupplierContext } from "../../contexts";
 function Supplier() {
   const [showModal, setShowModal] = useState(false);
   const { supplierInfo, supplierDispatch } = useContext(SupplierContext);
-  useEffect(() => {
-    console.log("tes supplier load :", supplierDispatch);
-  }, [supplierDispatch]);
+
   useEffect(() => {
     if (!supplierDispatch.isLoaded) {
       axios

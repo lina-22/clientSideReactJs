@@ -1,15 +1,14 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import "../CSS_Components/UserLayout.css";
 import { useContext, useEffect } from "react";
 import { AuthContext, ReservationContext } from "../contexts";
-import axios from "axios";
-import { BACKEND_URL } from "../utils";
 import { SET_RESERVATION, SET_USER } from "../actionTypes";
 
 function UserLayout() {
   const { auth, authDispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
   const { reservationValue, reservationDispatch } =
     useContext(ReservationContext);
 
@@ -39,6 +38,17 @@ function UserLayout() {
   //       }
   //   }
   // }, [auth.user]);
+  useEffect(() => {
+    if (!auth.user) {
+      const token = localStorage.getItem("AccessToken");
+      if (token) {
+        authDispatch({
+          type: SET_USER,
+          payload: token,
+        });
+      }
+    }
+  }, [auth, authDispatch, navigate]);
 
   return (
     <div className="main">

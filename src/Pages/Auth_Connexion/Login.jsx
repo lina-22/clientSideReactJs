@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import { LOG_IN } from "../../actionTypes";
 import { AuthContext } from "../../contexts";
 import { BACKEND_URL } from "../../utils";
-import Navbar from "../../Components/Navbar";
 import logo from "../../Images/logo.jpg";
 // import style from "./Login.css";
 

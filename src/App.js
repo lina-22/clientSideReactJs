@@ -47,7 +47,7 @@ import {
 // *************************************************
 // **************All Imports For Reducer****************
 // *************************************************
-import { useReducer } from "react";
+import { useReducer, useContext } from "react";
 import {
   adminReservationReducer,
   adminReservationStore,
@@ -66,7 +66,7 @@ import {
   productAvailableReducer,
   productAvailableStore,
 } from "./reducers/productAvailableReducer";
-
+import { LOG_IN } from "../src/actionTypes";
 // *************************************************
 // **************All Imports For React-Bootsrap/CSS****************
 // *************************************************
@@ -79,11 +79,6 @@ import { ToastContainer } from "react-toastify";
 // *************************************************
 import axios from "axios";
 
-const token = localStorage.getItem("AccessToken");
-// console.log(token);
-if (token) {
-  axios.defaults.headers.common = { Authorization: token };
-}
 // *************************************************
 // **************Function App started***************
 // *************************************************
@@ -123,6 +118,12 @@ function App() {
     reservationStore
   );
 
+  const token = localStorage.getItem("AccessToken");
+  // console.log(token);
+
+  if (token) {
+    axios.defaults.headers.common = { Authorization: token };
+  }
   return (
     <>
       <AuthContext.Provider value={{ auth, authDispatch }}>

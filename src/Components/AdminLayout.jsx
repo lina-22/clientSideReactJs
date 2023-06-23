@@ -13,7 +13,7 @@ import logout from "../Images/logout.png";
 function AdminLayout() {
   const { auth, authDispatch } = useContext(AuthContext);
   const { products, productsDispatch } = useContext(ProductContext);
-  console.log("test auth here in admin  :", auth);
+
   const navigate = useNavigate();
   const logOutHandler = () => {
     authDispatch({ type: LOG_OUT });
@@ -48,11 +48,19 @@ function AdminLayout() {
   //   }
   // }, [auth.user]);
 
-  // useEffect(() => {
-  //   console.log('test admin layout :', auth, products)
-  //   if (!auth.user) {
-  //   }
-  // }, [auth, products])
+  useEffect(() => {
+    if (!auth.user) {
+      const token = localStorage.getItem("AccessToken");
+      if (token) {
+        authDispatch({
+          type: SET_USER,
+          payload: token,
+        });
+      } else {
+        navigate("/login");
+      }
+    }
+  }, [auth, authDispatch, navigate]);
 
   return (
     <Container className="mx-auto">

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
 import { toast } from "react-toastify";
 import {
@@ -17,20 +17,24 @@ function Product() {
   const [showModal, setShowModal] = useState(false);
   const [showAttatch, setShowAttatch] = useState(false);
   const { productValue, productDispatch } = useContext(ProductContext);
+  const [page, setPage] = useState(0);
+  let size = 10;
 
-  useEffect(() => {
+  const getProdctPaginated = useCallback(() => {
     if (!productValue.isLoaded) {
       axios
-        .get(`${BACKEND_URL}/products`)
+        .get(`${BACKEND_URL}/products/${page}/${size}`)
         .then((res) => {
-          console.log(res.data);
-          const { status, data, message } = res.data;
-          if (status) {
+          console.log(res.data.content);
+          const { status, data, message } = res;
+          if (status === 200) {
             productDispatch({
               type: LOAD_PRODUCTS,
-              payload: data,
+              payload: data.content,
+              isLoaded: !!!data.content.length,
             });
-
+            console.log("test product value :", res, !!!data.content.length);
+            setPage((prevSt) => prevSt + 1);
             toast.success(message);
           } else {
             toast.error(message);
@@ -38,7 +42,29 @@ function Product() {
         })
         .catch();
     }
-  }, []);
+  }, [page, productDispatch, productValue.isLoaded, size]);
+
+  // useEffect(() => {
+  //   if (!productValue.isLoaded) {
+  //     axios
+  //       .get(`${BACKEND_URL}/products`)
+  //       .then((res) => {
+  //         console.log(res.data);
+  //         // const { status, data, message } = res.data;
+  //         // if (status) {
+  //         //   productDispatch({
+  //         //     type: LOAD_PRODUCTS,
+  //         //     payload: data,
+  //         //   });
+
+  //         //   toast.success(message);
+  //         // } else {
+  //         //   toast.error(message);
+  //         // }
+  //       })
+  //       .catch();
+  //   }
+  // }, [productDispatch, productValue.isLoaded]);
 
   const handleShowModal = () => {
     setShowModal((prvSt) => !prvSt);
@@ -94,6 +120,19 @@ function Product() {
       });
   };
 
+  const handleScroll = useCallback(
+    (e) => {
+      const bottom =
+        e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+      if (bottom) {
+        getProdctPaginated();
+      }
+    },
+    [getProdctPaginated]
+  );
+  useEffect(() => {
+    getProdctPaginated();
+  }, []);
   return (
     <Container className="mx-auto">
       <div className="clearfix my-2">
@@ -107,37 +146,38 @@ function Product() {
       </div>
 
       <hr />
-
-      {productValue.isLoaded ? (
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>is_featured</th>
-              <th>Price</th>
-              <th>Discount</th>
-              <th>Image</th>
-              <th>Description</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {productValue.products.map((prod, index) => (
-              <ProductTr
-                handleShowModal={handleShowModal}
-                handleAttatchModal={handleAttatchModal}
-                product={prod}
-                key={index}
-              />
-            ))}
-          </tbody>
-        </Table>
-      ) : (
-        <div className="text-center my-5">
-          <h4>Loading..............</h4>
-        </div>
-      )}
+      <div
+        style={{ height: "350px", overflow: "scroll" }}
+        onScroll={handleScroll}>
+        {productValue.products.length ? (
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {productValue.products.map((product, index) => (
+                <ProductTr
+                  handleShowModal={handleShowModal}
+                  handleAttatchModal={handleAttatchModal}
+                  product={product}
+                  key={index}
+                />
+              ))}
+            </tbody>
+          </Table>
+        ) : (
+          <div className="text-center my-5">
+            <h4>Loading..............</h4>
+          </div>
+        )}
+      </div>
 
       <ProductModal
         show={showModal}
@@ -145,10 +185,10 @@ function Product() {
         saveProduct={saveProduct}
         updateProduct={updateProduct}
       />
-      <AttatchCategoryModal
+      {/* <AttatchCategoryModal
         show={showAttatch}
         handleClose={handleAttatchModal}
-      />
+      /> */}
     </Container>
   );
 }

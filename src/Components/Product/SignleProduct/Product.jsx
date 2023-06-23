@@ -9,14 +9,6 @@ import favori from "../../../Images/favori.png";
 // }
 
 export const Product = ({ name, description, price, image, discount }) => {
-  let testProd = {
-    id: 1,
-    name: "test product",
-    decription: "test decription",
-    image: "../images/imgPage1/Formal1.png",
-    discount: 5,
-    price: 10,
-  };
   return (
     <div className={styles.mainProductCart}>
       <img

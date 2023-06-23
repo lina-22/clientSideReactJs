@@ -11,7 +11,6 @@ export const userStore = {
 export const authReducer = (state, action) => {
   switch (action.type) {
     case LOG_IN:
-      // const { user, token } = action.payload;
       const accessToken = `Bearer ${action.payload}`;
       axios.defaults.headers.common = { Authorization: accessToken };
       localStorage.setItem("AccessToken", accessToken);
@@ -24,7 +23,12 @@ export const authReducer = (state, action) => {
       };
 
     case SET_USER:
-      return { isLoaded: true, user: decodedUser };
+      let savedUser = jwt_decode(action.payload);
+      return {
+        isLoaded: true,
+        user: savedUser.sub,
+        role: savedUser.roles[0],
+      };
 
     case LOG_OUT:
       axios.defaults.headers.common = { Authorization: "" };
