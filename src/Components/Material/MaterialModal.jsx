@@ -1,27 +1,27 @@
 import { useContext, useEffect, useState } from "react";
 import { Modal, Form, Button } from "react-bootstrap";
-import { REMOVE_COLORS } from "../../actionTypes";
-import { ColorContext } from "../../contexts";
+import { REMOVE_MATERIALS } from "../../actionTypes";
+import { MaterialContext } from "../../contexts";
 
-function ColorModal({ show, handleClose, saveColor, updateColor }) {
-  const { colorInfo, colorDispatch } = useContext(ColorContext);
+function MaterialModal({ show, handleClose, saveMaterial, updateMaterial }) {
+  const { materialInfo, materialDispatch } = useContext(MaterialContext);
   const [state, setState] = useState({
-    colorId: "",
-    colorValue: "",
+    materialId: "",
+    materialValue: "",
     isLoading: false,
   });
 
-  useEffect(() => {
-    if (colorInfo.selectedColor) {
-      setState((prvSt) => {
-        return {
-          ...prvSt,
-          colourId: colorInfo.selectedColor.colourId,
-          colourValue: colorInfo.selectedColor.colourValue,
-        };
-      });
-    }
-  }, [colorInfo, show]);
+  // useEffect(() => {
+  //   if (materialInfo.selectedMaterial) {
+  //     setState((prvSt) => {
+  //       return {
+  //         ...prvSt,
+  //         materialId: materialInfo.selectedMaterial.materialId,
+  //         materialValue: materialInfo.selectedmaterial.materialValue,
+  //       };
+  //     });
+  //   }
+  // }, [materialInfo, show]);
 
   const onChangeHandler = (e) => {
     setState((prvSt) => {
@@ -36,20 +36,20 @@ function ColorModal({ show, handleClose, saveColor, updateColor }) {
     e.preventDefault();
     setState((prevSt) => ({ ...prevSt, isLoading: true }));
 
-    if (colorInfo.selectedColor) {
-      updateColor(state);
+    if (materialInfo.selectedMaterial) {
+      updateMaterial(state);
     } else {
-      saveColor(state);
+      saveMaterial(state);
     }
   };
 
   const resetState = () => {
-    colorDispatch({ type: REMOVE_COLORS });
+    materialDispatch({ type: REMOVE_MATERIALS });
 
     setTimeout(() => {
       setState({
-        ColorId: "",
-        ColorValue: "",
+        materialId: "",
+        materialValue: "",
         isLoading: false,
       });
     }, 5);
@@ -59,19 +59,19 @@ function ColorModal({ show, handleClose, saveColor, updateColor }) {
     <Modal show={show} onHide={handleClose} onExit={resetState}>
       <Modal.Header closeButton>
         <Modal.Title>
-          {colorInfo.selectedColor ? "Edit Color" : "Add New Color"}
+          {materialInfo.selectedMaterial ? "Edit material" : "Add New material"}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={onSubmitHandler}>
-          <Form.Group className="mb-3" controlId="col_name">
-            <Form.Label>Color</Form.Label>
+          <Form.Group className="mb-3" controlId="mat_name">
+            <Form.Label>Material</Form.Label>
             <Form.Control
               onChange={onChangeHandler}
               type="text"
-              name="colourValue"
-              value={state.colorValue}
-              placeholder="Ex: Red"
+              name="materialValue"
+              value={state.materialValue}
+              placeholder="Ex: Cotton"
               disabled={state.isLoading}
             />
           </Form.Group>
@@ -84,4 +84,4 @@ function ColorModal({ show, handleClose, saveColor, updateColor }) {
   );
 }
 
-export default ColorModal;
+export default MaterialModal;

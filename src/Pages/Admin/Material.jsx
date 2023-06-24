@@ -3,32 +3,33 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Button, Container, Table } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { ADD_COLORS, LOAD_COLORS, UPDATE_COLORS } from "../../actionTypes";
-import ColorModal from "../../Components/Color/ColorModal";
-import ColorTr from "../../Components/Color/ColorTr";
-import { ColorContext } from "../../contexts";
+import {
+  ADD_MATERIALS,
+  LOAD_MATERIALS,
+  UPDATE_MATERIALS,
+} from "../../actionTypes";
+import MaterialModal from "../../Components/Material/MaterialModal";
+import MaterialTr from "../../Components/Material/MaterialTr";
+import { MaterialContext } from "../../contexts";
 import { BACKEND_URL } from "../../utils";
 
-function Color() {
+function Material() {
   const [showModal, setShowModal] = useState(false);
-  const { colorInfo, colorDispatch } = useContext(ColorContext);
+  const { materialInfo, materialDispatch } = useContext(MaterialContext);
 
   useEffect(() => {
-    if (!colorInfo.isLoaded) {
+    if (!materialInfo.isLoaded) {
       axios
-        .get(`${BACKEND_URL}/colours`)
+        .get(`${BACKEND_URL}/materials`)
         .then((res) => {
           const { status, data } = res;
-
-          console.log("tes color load api:", res);
-
           if (status) {
-            colorDispatch({
-              type: LOAD_COLORS,
+            materialDispatch({
+              type: LOAD_MATERIALS,
               payload: data,
             });
 
-            toast.success("Color loaded");
+            toast.success("Material loaded");
           } else {
             toast.error("Something went wrong");
           }
@@ -41,18 +42,18 @@ function Color() {
     setShowModal((prvSt) => !prvSt);
   };
 
-  const saveColor = (data) => {
+  const saveMaterial = (data) => {
     axios
-      .post(`${BACKEND_URL}/colours`, data)
+      .post(`${BACKEND_URL}/materials`, data)
       .then((res) => {
         const { status, data } = res;
         if (status) {
-          colorDispatch({
-            type: ADD_COLORS,
+          materialDispatch({
+            type: ADD_MATERIALS,
             payload: data,
           });
 
-          toast.success("Color added successfully");
+          toast.success("Material added successfully");
           handleShowModal();
         } else {
           toast.error("Something went wrong");
@@ -64,16 +65,14 @@ function Color() {
       });
   };
 
-  const updateColor = (data) => {
-    console.log("test upd color :", data);
+  const updateMaterial = (data) => {
     axios
-      .put(`${BACKEND_URL}/colours`, data)
+      .put(`${BACKEND_URL}/materials`, data)
       .then((res) => {
         const { status, data } = res;
-        console.log("test upd color 2:", res);
         if (status) {
-          colorDispatch({
-            type: UPDATE_COLORS,
+          materialDispatch({
+            type: UPDATE_MATERIALS,
             payload: data,
           });
 
@@ -88,22 +87,22 @@ function Color() {
         console.log(err);
       });
   };
-
+  console.log("te matinfo : ", materialInfo);
   return (
     <Container className="mx-auto">
       <div className="clearfix my-2">
-        <h1 className="float-start">Color</h1>
+        <h1 className="float-start">Material</h1>
         <Button
           onClick={handleShowModal}
           className="float-end"
           variant="primary">
-          Add color
+          Add material
         </Button>
       </div>
 
       <hr />
 
-      {colorInfo.isLoaded ? (
+      {materialInfo?.isLoaded ? (
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -113,10 +112,10 @@ function Color() {
             </tr>
           </thead>
           <tbody>
-            {colorInfo.colors.map((cat, index) => (
-              <ColorTr
+            {materialInfo?.materials?.map((mat, index) => (
+              <MaterialTr
                 handleShowModal={handleShowModal}
-                color={cat}
+                material={mat}
                 key={index}
               />
             ))}
@@ -128,14 +127,14 @@ function Color() {
         </div>
       )}
 
-      <ColorModal
+      <MaterialModal
         show={showModal}
         handleClose={handleShowModal}
-        saveColor={saveColor}
-        updateColor={updateColor}
+        saveMaterial={saveMaterial}
+        updateMaterial={updateMaterial}
       />
     </Container>
   );
 }
 
-export default Color;
+export default Material;

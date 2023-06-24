@@ -2,22 +2,22 @@ import axios from "axios";
 import { useContext } from "react";
 import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { DELETE_COLORS, SELECT_COLORS } from "../../actionTypes";
-import { ColorContext } from "../../contexts";
+import { DELETE_MATERIALS, SELECT_MATERIALS } from "../../actionTypes";
+import { MaterialContext } from "../../contexts";
 import { BACKEND_URL } from "../../utils";
 
-function ColorTr({ color, handleShowModal }) {
-  const { colorDispatch } = useContext(ColorContext);
+function MaterialTr({ material, handleShowModal }) {
+  const { materialDispatch } = useContext(MaterialContext);
 
-  const deleteColor = (id) => {
+  const deleteMaterial = (id) => {
     if (window.confirm("Are You Sure?")) {
       axios
-        .delete(`${BACKEND_URL}/colours/${id}`)
+        .delete(`${BACKEND_URL}/materials/${id}`)
         .then((res) => {
           const { status } = res;
           if (status) {
-            colorDispatch({
-              type: DELETE_COLORS,
+            materialDispatch({
+              type: DELETE_MATERIALS,
               payload: id,
             });
 
@@ -32,31 +32,30 @@ function ColorTr({ color, handleShowModal }) {
         });
     }
   };
-  const editHandler = (color) => {
-    colorDispatch({
-      type: SELECT_COLORS,
-      payload: color,
+  const editHandler = (material) => {
+    materialDispatch({
+      type: SELECT_MATERIALS,
+      payload: material,
     });
     handleShowModal();
   };
-
   return (
     <tr>
-      <td>{color.colourId}</td>
-      <td>{color.colourValue}</td>
+      <td>{material?.materialId}</td>
+      <td>{material?.materialValue}</td>
       <td>
         <Button
           type="button"
           variant="warning"
           className="mx-1"
-          onClick={() => editHandler(color)}>
+          onClick={() => editHandler(material)}>
           Edit
         </Button>
         <Button
           type="button"
           variant="danger"
           className="mx-1"
-          onClick={() => deleteColor(color.colourId)}>
+          onClick={() => deleteMaterial(material.materialId)}>
           Delete
         </Button>
       </td>
@@ -64,4 +63,4 @@ function ColorTr({ color, handleShowModal }) {
   );
 }
 
-export default ColorTr;
+export default MaterialTr;

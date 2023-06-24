@@ -42,10 +42,10 @@ export const productReducer = (state, action) => {
 
     case DELETE_PRODUCTS:
       console.log("test delete :", action.payload);
-      let cats = state.products.filter((e) => e.productId !== action.payload);
+      let prods = state.products.filter((e) => e.productId !== action.payload);
       return {
         ...state,
-        products: cats,
+        products: prods,
       };
 
     default:

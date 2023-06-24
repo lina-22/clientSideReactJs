@@ -7,6 +7,7 @@ import AdminDashBord from "./Pages/Admin/AdminDashBord";
 import Category from "./Pages/Admin/Category";
 import Size from "./Pages/Admin/Size";
 import Color from "./Pages/Admin/Color";
+import Material from "./Pages/Admin/Material";
 import Supplier from "./Pages/Admin/Supplier";
 import Product from "./Pages/Admin/Product";
 import ProductAvailable from "./Pages/Admin/ProductAvailable";
@@ -36,6 +37,7 @@ import {
   AuthContext,
   CategoryContext,
   ColorContext,
+  MaterialContext,
   SizeContext,
   SupplierContext,
   ProductContext,
@@ -55,6 +57,7 @@ import {
 import { authReducer, userStore } from "./reducers/authReducer";
 import { categoryReducer, categoryStore } from "./reducers/categoryReducer";
 import { colorReducer, colorStore } from "./reducers/colorReducer";
+import { materialReducer, materialStore } from "./reducers/materialReducer";
 import { sizeReducer, sizeStore } from "./reducers/sizeReducer";
 import { supplierReducer, supplierStore } from "./reducers/supplierReducer";
 import { productReducer, productStore } from "./reducers/productReducer";
@@ -97,6 +100,10 @@ function App() {
     categoryStore
   );
   const [colorInfo, colorDispatch] = useReducer(colorReducer, colorStore);
+  const [materialInfo, materialDispatch] = useReducer(
+    materialReducer,
+    materialStore
+  );
   const [sizeInfo, sizeDispatch] = useReducer(sizeReducer, sizeStore);
   const [supplierInfo, supplierDispatch] = useReducer(
     supplierReducer,
@@ -129,69 +136,76 @@ function App() {
       <AuthContext.Provider value={{ auth, authDispatch }}>
         <CategoryContext.Provider value={{ categoryInfo, categoryDispatch }}>
           <ColorContext.Provider value={{ colorInfo, colorDispatch }}>
-            <SizeContext.Provider value={{ sizeInfo, sizeDispatch }}>
-              <SupplierContext.Provider
-                value={{ supplierInfo, supplierDispatch }}>
-                <ProductContext.Provider
-                  value={{ productValue, productDispatch }}>
-                  <ProductAvailableContext.Provider
-                    value={{ productAvailableValue, productAvailableDispatch }}>
-                    <ReservationContext.Provider
-                      value={{ reservationValue, reservationDispatch }}>
-                      <AdminReservationContext.Provider
-                        value={{
-                          adminReservationValue,
-                          adminReservationDispatch,
-                        }}>
-                        <Routes>
-                          <Route path="/login" element={<Login />} />
-                          <Route
-                            path="/registration"
-                            element={<Registration />}
-                          />
-                          <Route path="/admin" element={<AdminLayout />}>
-                            <Route index element={<AdminDashBord />} />
-                            <Route path="category" element={<Category />} />
-                            <Route path="size" element={<Size />} />
-                            <Route path="color" element={<Color />} />
-                            <Route path="supplier" element={<Supplier />} />
-                            <Route path="product" element={<Product />} />
+            <MaterialContext.Provider
+              value={{ materialInfo, materialDispatch }}>
+              <SizeContext.Provider value={{ sizeInfo, sizeDispatch }}>
+                <SupplierContext.Provider
+                  value={{ supplierInfo, supplierDispatch }}>
+                  <ProductContext.Provider
+                    value={{ productValue, productDispatch }}>
+                    <ProductAvailableContext.Provider
+                      value={{
+                        productAvailableValue,
+                        productAvailableDispatch,
+                      }}>
+                      <ReservationContext.Provider
+                        value={{ reservationValue, reservationDispatch }}>
+                        <AdminReservationContext.Provider
+                          value={{
+                            adminReservationValue,
+                            adminReservationDispatch,
+                          }}>
+                          <Routes>
+                            <Route path="/login" element={<Login />} />
                             <Route
-                              path="product_availables"
-                              element={<ProductAvailable />}
+                              path="/registration"
+                              element={<Registration />}
                             />
+                            <Route path="/admin" element={<AdminLayout />}>
+                              <Route index element={<AdminDashBord />} />
+                              <Route path="category" element={<Category />} />
+                              <Route path="size" element={<Size />} />
+                              <Route path="color" element={<Color />} />
+                              <Route path="material" element={<Material />} />
+                              <Route path="supplier" element={<Supplier />} />
+                              <Route path="product" element={<Product />} />
+                              <Route
+                                path="product_availables"
+                                element={<ProductAvailable />}
+                              />
 
-                            <Route
-                              path="reservations"
-                              element={<Reservations />}
-                            />
-                          </Route>
+                              <Route
+                                path="reservations"
+                                element={<Reservations />}
+                              />
+                            </Route>
 
-                          <Route path="/" element={<UserLayout />}>
-                            <Route index element={<Accueil />} />
-                            <Route
-                              path="boutiqueSubSection/:productID"
-                              element={<BoutiqueSubSection />}
-                            />
+                            <Route path="/" element={<UserLayout />}>
+                              <Route index element={<Accueil />} />
+                              <Route
+                                path="boutiqueSubSection/:productID"
+                                element={<BoutiqueSubSection />}
+                              />
 
-                            <Route
-                              path="boutiqueLandingImgaes"
-                              element={<BoutiqueLandingImgaes />}
-                            />
+                              <Route
+                                path="boutiqueLandingImgaes"
+                                element={<BoutiqueLandingImgaes />}
+                              />
 
-                            <Route path="panier" element={<Panier />} />
-                            <Route path="propos" element={<Propos />} />
-                            <Route path="carts" element={<Carts />} />
-                            <Route path="payment" element={<Payment />} />
-                            <Route path="category" element={<Category />} />
-                          </Route>
-                        </Routes>
-                      </AdminReservationContext.Provider>
-                    </ReservationContext.Provider>
-                  </ProductAvailableContext.Provider>
-                </ProductContext.Provider>
-              </SupplierContext.Provider>
-            </SizeContext.Provider>
+                              <Route path="panier" element={<Panier />} />
+                              <Route path="propos" element={<Propos />} />
+                              <Route path="carts" element={<Carts />} />
+                              <Route path="payment" element={<Payment />} />
+                              <Route path="category" element={<Category />} />
+                            </Route>
+                          </Routes>
+                        </AdminReservationContext.Provider>
+                      </ReservationContext.Provider>
+                    </ProductAvailableContext.Provider>
+                  </ProductContext.Provider>
+                </SupplierContext.Provider>
+              </SizeContext.Provider>
+            </MaterialContext.Provider>
           </ColorContext.Provider>
         </CategoryContext.Provider>
       </AuthContext.Provider>

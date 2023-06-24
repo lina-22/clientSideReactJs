@@ -95,14 +95,19 @@ function AdminLayout() {
                 </Link>
               </Nav.Item>
               <Nav.Item>
-                <Link className="nav-link mx-3" to="/admin/category">
-                  Category
+                <Link className="nav-link mx-3" to="/admin/supplier">
+                  Supplier
                 </Link>
               </Nav.Item>
 
               <Nav.Item>
                 <Link className="nav-link mx-3" to="/admin/product">
                   Product
+                </Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Link className="nav-link mx-3" to="/admin/size">
+                  Size
                 </Link>
               </Nav.Item>
               {/* <Nav.Item>
@@ -116,23 +121,18 @@ function AdminLayout() {
                 </Link>
               </Nav.Item>
               <Nav.Item>
-                <Link className="nav-link mx-3" to="/admin/size">
-                  Size
+                <Link className="nav-link mx-3" to="/admin/category">
+                  Category
                 </Link>
               </Nav.Item>
               <Nav.Item>
-                <Link className="nav-link mx-3" to="/admin/supplier">
-                  Supplier
+                <Link className="nav-link mx-3" to="/admin/material">
+                  Material
                 </Link>
               </Nav.Item>
-
-              {/* <Nav.Item>
-                <Link className='nav-link mx-3' to=''>
-                  ProductLine
-                </Link>
-              </Nav.Item> */}
               <Nav.Item>
-                <Link className="nav-link mx-3" to="/admin/reservations">
+                {/* <Link className="nav-link mx-3" to="/admin/reservations"> */}
+                <Link className="nav-link mx-3" to="">
                   Reservation
                 </Link>
               </Nav.Item>
