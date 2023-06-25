@@ -1,14 +1,7 @@
 import styles from "./product.module.scss";
-import favori from "../../../Images/favori.png";
-// interface Props {
-//   name: string;
-//   description: String;
-//   price: number;
-//   image: any;
-//   discount: number;
-// }
 
-export const Product = ({ name, description, price, image, discount }) => {
+export const Product = ({ product, showDetails }) => {
+  const { productId, name, description, price, image, discount } = product;
   return (
     <div className={styles.mainProductCart}>
       <img
@@ -20,7 +13,12 @@ export const Product = ({ name, description, price, image, discount }) => {
       <p>{description}</p>
       <p>{price}€</p>
       <p>{discount}%</p>
-      <img className="favori" src={favori} alt="" />
+      <button
+        type="button"
+        className="btn btn-dark w-100"
+        onClick={() => showDetails(productId)}>
+        Voir details
+      </button>
     </div>
   );
 };

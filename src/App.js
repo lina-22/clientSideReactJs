@@ -82,6 +82,7 @@ import { ToastContainer } from "react-toastify";
 // *************************************************
 import axios from "axios";
 import UserReservation from "./Pages/User/UserReservation";
+import { SignleProduct } from "./Components/Product/SignleProduct/SignleProduct";
 
 // *************************************************
 // **************Function App started***************
@@ -192,6 +193,10 @@ function App() {
                                 element={<BoutiqueLandingImgaes />}
                               />
 
+                              <Route
+                                path="product_details/:id"
+                                element={<SignleProduct />}
+                              />
                               <Route path="panier" element={<Panier />} />
                               <Route path="propos" element={<Propos />} />
                               <Route
