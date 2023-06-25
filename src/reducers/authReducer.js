@@ -14,7 +14,6 @@ export const authReducer = (state, action) => {
       const accessToken = `Bearer ${action.payload}`;
       axios.defaults.headers.common = { Authorization: accessToken };
       localStorage.setItem("AccessToken", accessToken);
-
       let decodedUser = jwt_decode(action.payload);
       return {
         isLoaded: true,

@@ -1,25 +1,46 @@
-import { CLEAR_RESERVATION, SET_RESERVATION } from "../actionTypes";
-
+import {
+  ADD_RESERVATION,
+  CLEAR_RESERVATION,
+  LOAD_ALL_RESERVATION,
+  LOAD_ALL_RESERVATION_BY_USER,
+  SET_RESERVATION,
+} from "../actionTypes";
 
 export const reservationStore = {
   isLoaded: false,
-  reservation: null,
+  reservations: [],
   cartCount: 0,
 };
 
 export const reservationReducer = (state, action) => {
   switch (action.type) {
-    case SET_RESERVATION:
+    case ADD_RESERVATION:
       return {
         isLoaded: true,
-        reservation: action.payload,
-        cartCount: action.payload.productLines.length,
+        reservations: [...state.reservations, action.payload],
+        cartCount: state.reservations.length,
       };
+    case LOAD_ALL_RESERVATION:
+      return {
+        isLoaded: true,
+        reservations: action.payload,
+        cartCount: state.reservations.length,
+      };
+    case LOAD_ALL_RESERVATION_BY_USER:
+      return {
+        isLoaded: true,
+        reservations: action.payload,
+        cartCount: state.reservations.length,
+      };
+
     case CLEAR_RESERVATION:
-      return reservationStore;
+      return {
+        isLoaded: false,
+        reservations: [],
+        cartCount: 0,
+      };
 
     default:
       return state;
   }
-
 };

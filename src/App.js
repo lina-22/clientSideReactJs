@@ -11,7 +11,7 @@ import Material from "./Pages/Admin/Material";
 import Supplier from "./Pages/Admin/Supplier";
 import Product from "./Pages/Admin/Product";
 import ProductAvailable from "./Pages/Admin/ProductAvailable";
-import Reservations from "./Pages/Admin/Reservations";
+import Reservation from "./Pages/Admin/Reservation";
 // *************************************************
 // **************All Pages For User****************
 // *************************************************
@@ -81,6 +81,7 @@ import { ToastContainer } from "react-toastify";
 // **************All Imports For Token/axios****************
 // *************************************************
 import axios from "axios";
+import UserReservation from "./Pages/User/UserReservation";
 
 // *************************************************
 // **************Function App started***************
@@ -170,13 +171,12 @@ function App() {
                               <Route path="supplier" element={<Supplier />} />
                               <Route path="product" element={<Product />} />
                               <Route
+                                path="reservation"
+                                element={<Reservation />}
+                              />
+                              <Route
                                 path="product_availables"
                                 element={<ProductAvailable />}
-                              />
-
-                              <Route
-                                path="reservations"
-                                element={<Reservations />}
                               />
                             </Route>
 
@@ -194,6 +194,10 @@ function App() {
 
                               <Route path="panier" element={<Panier />} />
                               <Route path="propos" element={<Propos />} />
+                              <Route
+                                path="user-reservation"
+                                element={<UserReservation />}
+                              />
                               <Route path="carts" element={<Carts />} />
                               <Route path="payment" element={<Payment />} />
                               <Route path="category" element={<Category />} />

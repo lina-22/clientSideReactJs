@@ -100,6 +100,11 @@ function Navbar() {
                 <Link to="/admin">Admin</Link>
               </li>
             )}
+            {auth.role === "USER" && (
+              <li>
+                <Link to="/user-reservation">Reservation</Link>
+              </li>
+            )}
           </ul>
         </nav>
       </section>

@@ -3,36 +3,32 @@ import moment from "moment";
 import { useContext, useEffect, useState } from "react";
 import { Container, Form, Modal, Table } from "react-bootstrap";
 import { toast } from "react-toastify";
-import {
-  ADMIN_RESERVATION_STATUS_CHANGE,
-  LOAD_ADMIN_RESERVATIONS,ADMIN_RESERVATION_DELETE
-} from "../../actionTypes";
-import { AdminReservationContext } from "../../contexts";
+import { AuthContext, ReservationContext } from "../../contexts";
 import { BACKEND_URL } from "../../utils";
+import { LOAD_ALL_RESERVATION_BY_USER } from "../../actionTypes";
 
-function Reservations() {
-  const { adminReservationValue, adminReservationDispatch } = useContext(
-    AdminReservationContext
-  );
+function UserReservation() {
+  const { auth } = useContext(AuthContext);
+  const { reservationValue, reservationDispatch } =
+    useContext(ReservationContext);
 
   const [showModal, setShowModal] = useState(false);
   const [targetReservation, setTargetReservation] = useState(null);
   const [status, setStatus] = useState("");
+  console.log("auth res :", auth.user);
 
   useEffect(() => {
-    if (!adminReservationValue.isLoaded) {
+    if (!reservationValue.isLoaded) {
       axios
-        .get(`${BACKEND_URL}/reservations`)
+        .get(`${BACKEND_URL}/reservations/users/${auth.user}`)
         .then((res) => {
-          const { status, message, data } = res.data;
-
-          if (status) {
-            adminReservationDispatch({
-              type: LOAD_ADMIN_RESERVATIONS,
+          const { status, message, data } = res;
+          if (status === 200) {
+            reservationDispatch({
+              type: LOAD_ALL_RESERVATION_BY_USER,
               payload: data,
             });
-
-            toast.success(message);
+            toast.success("Reservation loaded");
           } else {
             toast.error(message);
           }
@@ -49,7 +45,7 @@ function Reservations() {
     if (resv) {
       setTargetReservation(resv);
       setStatus(resv.status);
-    }else{
+    } else {
       setStatus("");
     }
   };
@@ -67,10 +63,10 @@ function Reservations() {
       .then((res) => {
         const { status, data, message } = res.data;
         if (status) {
-          adminReservationDispatch({
-            type: ADMIN_RESERVATION_STATUS_CHANGE,
-            payload: data,
-          });
+          // reservationDispatch({
+          //   type: ADMIN_RESERVATION_STATUS_CHANGE,
+          //   payload: data,
+          // });
 
           toast.success(message);
           handleClose();
@@ -90,10 +86,10 @@ function Reservations() {
         .then((res) => {
           const { status, data, message } = res.data;
           if (status) {
-            adminReservationDispatch({
-              type: ADMIN_RESERVATION_DELETE,
-              payload: id,
-            });
+            // reservationDispatch({
+            //   type: ADMIN_RESERVATION_DELETE,
+            //   payload: id,
+            // });
 
             toast.success(message);
           } else {
@@ -106,6 +102,7 @@ function Reservations() {
         });
     }
   };
+  console.log("test store :", reservationValue);
   return (
     <>
       <Container className="mx-auto">
@@ -113,7 +110,7 @@ function Reservations() {
           <h1 className="float-start">Reservations</h1>
         </div>
         <hr />
-        {adminReservationValue.isLoaded ? (
+        {reservationValue.isLoaded ? (
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -126,9 +123,9 @@ function Reservations() {
               </tr>
             </thead>
             <tbody>
-              {adminReservationValue.reservations.map((resv, index) => (
+              {reservationValue.reservations.map((resv, index) => (
                 <tr key={index}>
-                  <td>{resv.id}</td>
+                  <td>{resv.reservationId}</td>
                   <td>{resv.reference}</td>
                   <td>{resv.status}</td>
                   <td>{moment(resv.created_at).format("MMM DD, YYYY")}</td>
@@ -136,11 +133,12 @@ function Reservations() {
                   <td>
                     <button
                       onClick={() => handleClose(resv)}
-                      className="btn btn-sm px-4 py-2 btn-info my-2 mx-2"
-                    >
+                      className="btn btn-sm px-4 py-2 btn-info my-2 mx-2">
                       Change Status
                     </button>
-                    <button onClick={() => onDeleteHandler(resv.id)} className="btn btn-sm px-4 py-2 btn-danger my-2 mx-2">
+                    <button
+                      onClick={() => onDeleteHandler(resv.id)}
+                      className="btn btn-sm px-4 py-2 btn-danger my-2 mx-2">
                       Delete
                     </button>
                   </td>
@@ -167,8 +165,7 @@ function Reservations() {
                 onChange={onChangeHandler}
                 name="status"
                 className="form-control"
-                defaultValue={status}
-              >
+                defaultValue={status}>
                 <option value="">Select One</option>
                 <option value="Active">Active</option>
                 <option value="Deactive">Deactive</option>
@@ -186,4 +183,4 @@ function Reservations() {
   );
 }
 
-export default Reservations;
+export default UserReservation;

@@ -2,21 +2,22 @@ import axios from "axios";
 import { useContext, useEffect } from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-
 import { Outlet } from "react-router-dom";
-import { LOG_OUT, SET_USER } from "../actionTypes";
-import { AuthContext, ProductContext } from "../contexts";
+import { CLEAR_RESERVATION, LOG_OUT, SET_USER } from "../actionTypes";
+import { AuthContext, ProductContext, ReservationContext } from "../contexts";
 import { BACKEND_URL } from "../utils";
 import logout from "../Images/logout.png";
 // import MyNavbar from "./NavbarAdmin";
 // import Footer from "./Footer";
 function AdminLayout() {
+  const { reservationDispatch } = useContext(ReservationContext);
   const { auth, authDispatch } = useContext(AuthContext);
   const { products, productsDispatch } = useContext(ProductContext);
 
   const navigate = useNavigate();
   const logOutHandler = () => {
     authDispatch({ type: LOG_OUT });
+    reservationDispatch({ type: CLEAR_RESERVATION });
     navigate("/");
   };
   // useEffect(() => {
@@ -131,8 +132,7 @@ function AdminLayout() {
                 </Link>
               </Nav.Item>
               <Nav.Item>
-                {/* <Link className="nav-link mx-3" to="/admin/reservations"> */}
-                <Link className="nav-link mx-3" to="">
+                <Link className="nav-link mx-3" to="/admin/reservation">
                   Reservation
                 </Link>
               </Nav.Item>
