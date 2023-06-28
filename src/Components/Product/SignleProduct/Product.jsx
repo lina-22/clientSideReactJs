@@ -22,15 +22,3 @@ export const Product = ({ product, showDetails }) => {
     </div>
   );
 };
-
-// {
-//   state.products.slice(0, 4).map((product, index) => (
-//     <Link to={`/boutiqueSubSection/${product.id}`} key={index}>
-//       <img
-//         src={`${IMAGE_URL}/${product.image}`}
-//         key={index}
-//         alt="{product.name} "
-//       />
-//     </Link>
-//   ));
-// }

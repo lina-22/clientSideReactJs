@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { DELETE_PRODUCTS, SELECT_PRODUCTS } from "../../actionTypes";
 import { ProductContext } from "../../contexts";
-import { BACKEND_URL, IMAGE_URL } from "../../utils";
+import { BACKEND_URL } from "../../utils";
 
 function ProductTr({ product, handleShowModal, handleAttatchModal }) {
   const { productDispatch } = useContext(ProductContext);

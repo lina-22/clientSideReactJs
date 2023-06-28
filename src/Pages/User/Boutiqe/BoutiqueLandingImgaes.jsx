@@ -4,7 +4,7 @@ import { Button, Col, Container, Row } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
 import { CategoryContext } from "../../../contexts";
 import axios from "axios";
-import { BACKEND_URL, IMAGE_URL } from "../../../utils";
+import { BACKEND_URL } from "../../../utils";
 import { LOAD_CATEGORIES } from "../../../actionTypes";
 import { toast } from "react-toastify";
 import { Link, useNavigate, useParams } from "react-router-dom";

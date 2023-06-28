@@ -5,11 +5,10 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { SET_RESERVATION } from "../../actionTypes";
 import { ReservationContext } from "../../contexts";
-import { BACKEND_URL, IMAGE_URL } from "../../utils";
+import { BACKEND_URL } from "../../utils";
 
 function Carts() {
-  const { reservationValue} =
-    useContext(ReservationContext);
+  const { reservationValue } = useContext(ReservationContext);
   return (
     <>
       <Container className="mt-5 mx-auto pt-5">
@@ -31,7 +30,7 @@ function Carts() {
       </Container>
       <div className="row">
         <div className="col-4 p-2 mx-auto">
-          <Button variant="secondary"className="w-100">
+          <Button variant="secondary" className="w-100">
             {/* <Link to="/payment" ></Link> */}
             Payer Maintenant
             {/* <a href="/payment"></a> */}
@@ -52,7 +51,7 @@ function SingleCart({ cart }) {
     axios
       .post(`${BACKEND_URL}/productsLine/${action}`, {
         product_available_id: cart.product_available_id,
-        reservation_id:cart.reservation_id,
+        reservation_id: cart.reservation_id,
         amount: 1,
       })
       .then((res) => {
@@ -70,32 +69,35 @@ function SingleCart({ cart }) {
       });
   };
   const deleteCart = () => {
-    axios.delete(`${BACKEND_URL}/productsLine?reservation_id=${cart.reservation_id}&product_available_id=${cart.product_available_id}`
-     ).then(res => {
-      let {status, data, message} = res.data;
+    axios
+      .delete(
+        `${BACKEND_URL}/productsLine?reservation_id=${cart.reservation_id}&product_available_id=${cart.product_available_id}`
+      )
+      .then((res) => {
+        let { status, data, message } = res.data;
 
-      if(status){
-        toast.success("Cart Delete Success!");
-        reservationDispatch({type: SET_RESERVATION, payload: data});
-      }else{
-        toast.success(message);
-      }
-
-    }).catch(err => {
-      console.log(err);
-      toast.error("Something Went Wrong!!");
-    });
-  }
+        if (status) {
+          toast.success("Cart Delete Success!");
+          reservationDispatch({ type: SET_RESERVATION, payload: data });
+        } else {
+          toast.success(message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Something Went Wrong!!");
+      });
+  };
   return (
     <div className="mb-2">
       <div className="border border-warning rounded">
         <Row>
           <Col sm={3}>
-            <img
+            {/* <img
               width="100%"
               src={`${IMAGE_URL}/${cart.product.image}`}
               alt=""
-            />
+            /> */}
           </Col>
           <Col sm={5}>
             <h4>{cart.product.name}</h4>
@@ -127,11 +129,17 @@ function SingleCart({ cart }) {
                 </tbody>
               </table>
               <ButtonGroup className="w-100 mt-4">
-                <Button onClick={() => changeCartQuantity('decrement')} variant="info" className="w-50">
+                <Button
+                  onClick={() => changeCartQuantity("decrement")}
+                  variant="info"
+                  className="w-50">
                   {" "}
                   -{" "}
                 </Button>
-                <Button onClick={() => changeCartQuantity('increment')} variant="primary" className="w-50">
+                <Button
+                  onClick={() => changeCartQuantity("increment")}
+                  variant="primary"
+                  className="w-50">
                   {" "}
                   +{" "}
                 </Button>
@@ -140,10 +148,12 @@ function SingleCart({ cart }) {
           </Col>
         </Row>
       </div>
-      <Button variant="danger" onClick={() => deleteCart()} className="py-2 w-100 mt-1">
+      <Button
+        variant="danger"
+        onClick={() => deleteCart()}
+        className="py-2 w-100 mt-1">
         Delete
       </Button>
-
     </div>
   );
 }

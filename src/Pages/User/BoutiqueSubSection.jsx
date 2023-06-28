@@ -2,7 +2,7 @@ import "../../CSS_User/BoutiqueSubSection.css";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { BACKEND_URL, IMAGE_URL } from "../../utils";
+import { BACKEND_URL } from "../../utils";
 import { toast } from "react-toastify";
 import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
 import { AuthContext, ReservationContext } from "../../contexts";
@@ -49,11 +49,11 @@ function BoutiqueSubSection() {
             <Row>
               <Col sm={6}>
                 <div className="px-2">
-                  <img
+                  {/* <img
                     className="w-100"
                     src={`${IMAGE_URL}/${product.image}`}
                     alt={product.name}
-                  />
+                  /> */}
                 </div>
               </Col>
               <Col sm={6}>

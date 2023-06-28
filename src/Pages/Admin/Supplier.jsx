@@ -116,6 +116,7 @@ function Supplier() {
               <th>Country</th>
               <th>Company Name</th>
               <th>Contact Name</th>
+              <th>Contact Title</th>
               <th>Address</th>
               <th>Region</th>
               <th>Postal code</th>

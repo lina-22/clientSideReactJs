@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { BACKEND_URL, IMAGE_URL } from "../../../utils";
+import { BACKEND_URL } from "../../../utils";
 
 const addToCart = (product) => {
   let existingCart = JSON.parse(localStorage.getItem("cart"));

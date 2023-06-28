@@ -7,33 +7,9 @@ import photoHome2222 from "../../Images/Final_Female_Dress/dress22.jpg";
 
 import photoWomen from "../../Images/Final_Female_Dress/womens.jpg";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { BACKEND_URL, IMAGE_URL } from "../../utils";
-
 import "../../CSS_User/Accueil.css";
-import { Link } from "react-router-dom";
 
 function Accueil() {
-  const [state, setState] = useState({
-    products: [],
-    categories: [],
-  });
-  // useEffect(() => {
-  //   axios
-  //     .get(`${BACKEND_URL}/gethomedata`)
-  //     .then((res) => {
-  //       const responseData = res.data;
-
-  //       if (responseData.status === true) {
-  //         setState(responseData.data);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
   return (
     <div>
       <div className="hero">
@@ -50,7 +26,7 @@ function Accueil() {
             <span>A UN SEUL ENDROIT</span>
             {/* <span>Les Styles Du Moment</span> */}
           </h4>
-          <article>
+          {/* <article>
             {state.products.slice(0, 4).map((product, index) => (
               <Link to={`/boutiqueSubSection/${product.id}`} key={index}>
                 <img
@@ -60,7 +36,7 @@ function Accueil() {
                 />
               </Link>
             ))}
-          </article>
+          </article> */}
         </section>
         <section className="trending">
           <article>
@@ -82,7 +58,7 @@ function Accueil() {
             <img className="photo_left" src={photoHome2222} alt="" />
             <img className="photo_left" src={photoHome22} alt="" />
             <img className="photo_left" src={photoHome222} alt="" />
-            {state.products.slice(0, 4).map((product, index) => (
+            {/* {state.products.slice(0, 4).map((product, index) => (
               <Link to={`/boutiqueSubSection/${product.id}`} key={index}>
                 <img
                   src={`${IMAGE_URL}/${product.image}`}
@@ -90,7 +66,7 @@ function Accueil() {
                   alt="{product.name} "
                 />
               </Link>
-            ))}
+            ))} */}
           </article>
         </section>
       </div>
