@@ -85,13 +85,13 @@ function ProductTr({ product, handleShowModal, handleAttatchModal }) {
           Delete
         </Button>
 
-        <Button
+        {/* <Button
           variant="success"
           size="sm"
           className="mx-1"
           onClick={() => attactchCategoryHandler(product)}>
           Attatch Category
-        </Button>
+        </Button> */}
       </td>
     </tr>
   );

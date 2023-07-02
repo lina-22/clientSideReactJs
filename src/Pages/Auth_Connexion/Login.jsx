@@ -59,13 +59,13 @@ function Login() {
           toast.success("Log in successful");
           setState({ email: "", password: "", isLoading: false });
         } else {
-          toast.error("Something went wrong");
+          toast.error("User name or password does not match");
           setState({ ...state, isLoading: false });
         }
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Something Went Wrong!!");
+        toast.error("User name or password does not match");
         setState({ ...state, isLoading: false });
       });
   };
