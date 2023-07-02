@@ -15,7 +15,7 @@ function CategoryTr({ category, handleShowModal }) {
         .delete(`${BACKEND_URL}/categories/${id}`)
         .then((res) => {
           const { status } = res;
-          if (status) {
+          if (status === 200) {
             categoryDispatch({
               type: DELETE_CATEGORIES,
               payload: id,
