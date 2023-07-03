@@ -77,6 +77,13 @@ function BoutiqueLandingImgaes() {
     <div className="Bboutique">
       <div className="Blandingboutiqe">
         <h1>Boutique</h1>
+        <section
+          className="d-flex justify-content-around"
+          style={{ background: "#f0f0f0" }}>
+          <button className="p-2">Homme</button>
+          <button className="p-2">Femme</button>
+        </section>
+        <br />
         <h2> Nos Meilleures Offres Idées susceptibles de vous plaire </h2>
       </div>
       <Container

@@ -104,7 +104,7 @@ export const SignleProduct = () => {
         <section className={styles.details}>
           <h5>{product.name}</h5>
           <h6>{product.description}</h6>
-
+          <p>Prix : {product.price}</p>
           <section className={styles.details_color_size}>
             <p>Choissez : </p>
             <label htmlFor="colour">Coulour :</label>

@@ -31,7 +31,6 @@ function Navbar() {
   }, []);
   const [itemsInCart, setItemsInCart] = useState("");
   useEffect(() => {
-    console.log("test itemsInCart :", cartInfo);
     setItemsInCart(cartInfo.totalQty);
   }, [cartInfo]);
   return (
@@ -47,7 +46,7 @@ function Navbar() {
           </h1>
         </header>
         <section className="panier_logo">
-          <Link to={"/carts"}>
+          <Link to={"/cart"}>
             <span className="position-relative mx-4">
               <img className="panier" src={shoppingCartIcon} alt="panier" />
               <span

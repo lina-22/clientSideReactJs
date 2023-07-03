@@ -19,7 +19,7 @@ import UserLayout from "./Components/UserLayout";
 import Accueil from "./Pages/User/Accueil";
 import BoutiqueLandingImgaes from "./Pages/User/Boutiqe/BoutiqueLandingImgaes";
 import BoutiqueSubSection from "./Pages/User/BoutiqueSubSection";
-import Carts from "./Pages/User/carts";
+import Cart from "./Pages/User/Cart";
 import Panier from "./Pages/User/Group";
 import Payment from "./Pages/User/payment";
 import Propos from "./Pages/User/Propos";
@@ -207,7 +207,7 @@ function App() {
                                   path="user-reservation"
                                   element={<UserReservation />}
                                 />
-                                <Route path="carts" element={<Carts />} />
+                                <Route path="cart" element={<Cart />} />
                                 <Route path="payment" element={<Payment />} />
                                 <Route path="category" element={<Category />} />
                               </Route>

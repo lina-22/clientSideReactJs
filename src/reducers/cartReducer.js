@@ -7,7 +7,6 @@ export const cartStore = {
 };
 
 export const cartReducer = (state, action) => {
-  console.log("cart st :", state, action);
   switch (action.type) {
     case SET_CART:
       return {
