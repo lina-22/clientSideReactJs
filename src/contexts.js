@@ -10,4 +10,5 @@ export const ColorContext = React.createContext();
 export const SupplierContext = React.createContext();
 export const ProductAvailableContext = React.createContext();
 export const ProductContext = React.createContext();
+export const CartContext = React.createContext();
 export const ReservationContext = React.createContext();

@@ -1,15 +1,14 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import logoImg from "../Images/IF.JPG";
 import panierImg from "../Images/imgPage1/panier_img.png";
 import shoppingCartIcon from "../Images/imgPage1/shopping_cart.svg";
 import menuIcon from "../Images/menu.png";
 import logout from "../Images/logout.png";
-// import favori from "../Images/favori.png";
-
 import "../CSS_Components/Navbar.css";
-import { useContext } from "react";
-import { AuthContext, ReservationContext } from "../contexts";
-import { CLEAR_RESERVATION, LOG_OUT } from "../actionTypes";
+import { AuthContext, CartContext, ReservationContext } from "../contexts";
+import { CLEAR_RESERVATION, LOG_OUT, SET_CART } from "../actionTypes";
+import { getCartInfo } from "../helper/helper";
 function Navbar() {
   const { auth, authDispatch } = useContext(AuthContext);
   const { reservationValue, reservationDispatch } =
@@ -18,7 +17,23 @@ function Navbar() {
     authDispatch({ type: LOG_OUT });
     reservationDispatch({ type: CLEAR_RESERVATION });
   };
+  const { cartInfo, cartDispatch } = useContext(CartContext);
 
+  useEffect(() => {
+    let cartInfoInit = getCartInfo();
+    cartDispatch({
+      type: SET_CART,
+      payload: {
+        total: cartInfoInit.total,
+        totalQty: cartInfoInit.totalQty,
+      },
+    });
+  }, []);
+  const [itemsInCart, setItemsInCart] = useState("");
+  useEffect(() => {
+    console.log("test itemsInCart :", cartInfo);
+    setItemsInCart(cartInfo.totalQty);
+  }, [cartInfo]);
   return (
     <section className="top">
       <marquee className="top_p">
@@ -37,12 +52,13 @@ function Navbar() {
               <img className="panier" src={shoppingCartIcon} alt="panier" />
               <span
                 style={{
-                  backgroundColor: "",
+                  backgroundColor: "#F0C231",
                   right: -20,
                   borderRadius: "50%",
+                  color: "#000",
                 }}
-                className="position-absolute px-3 py-1 text-white">
-                {reservationValue.cartCount}
+                className="position-absolute px-2 py-1">
+                {itemsInCart}
               </span>
             </span>
           </Link>
