@@ -26,6 +26,7 @@ function Reservation() {
               type: LOAD_ALL_RESERVATION,
               payload: data,
             });
+            console.log("test reservation :", data.created_at);
             toast.success("Reservation loaded");
           } else {
             toast.error(message);
@@ -127,7 +128,7 @@ function Reservation() {
                   <td>{resv.reference}</td>
                   <td>{resv.status}</td>
                   <td>{moment(resv.created_at).format("MMM DD, YYYY")}</td>
-                  <td>{moment(resv.expire_date).format("MMM DD, YYYY")}</td>
+                  <td>{moment(resv.expireDate).format("MMM DD, YYYY")}</td>
                   <td>
                     <button
                       onClick={() => handleClose(resv)}
